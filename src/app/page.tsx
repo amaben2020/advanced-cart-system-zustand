@@ -25,7 +25,7 @@ export default function Home() {
       Home
       <div>
         <h2>Products</h2>
-        {loading && <div className="spinner-5">loading....</div>}
+        {loading && <div>loading....</div>}
         {error && <div className="text-red-700">ERROR....</div>}
         <p>Cart Store</p> {JSON.stringify(cart.cart)}
         <div className="flex gap-4">
