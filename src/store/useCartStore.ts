@@ -19,19 +19,19 @@ export const useCartStore = create<TState & TActions>((set, get) => ({
   addToCart: (product: TProduct) => {
     set((state) => {
       const productInCart = state.cart.findIndex(
-        (elem) => elem.id === product.id,
+        (elem) => elem?.id === product.id,
       );
 
       product["quantity"] = 1;
       if (
         productInCart > -1 &&
-        state.cart.find((elem) => elem.id === product.id)
+        state.cart.find((elem) => elem?.id === product.id)
       ) {
         const updatedCart = state.cart.map((elem) => {
-          if (elem.id === product.id) {
+          if (elem?.id === product.id) {
             return {
               ...elem,
-              quantity: elem.quantity + 1,
+              quantity: elem?.quantity + 1,
             };
           }
         });
