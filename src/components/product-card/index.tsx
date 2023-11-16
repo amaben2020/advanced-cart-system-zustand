@@ -14,6 +14,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
 
       {/* TODO: use stars here */}
       <p>{product.rating}</p>
+      <p className="font-bold">${product.price.toFixed(2)}</p>
 
       <button
         className="w-full bg-green-700 text-white font-bold rounded-md p-3 mt-6"
@@ -21,18 +22,6 @@ const ProductCard = ({ product }: { product: TProduct }) => {
       >
         Add to cart
       </button>
-
-      {/* <button
-        onClick={() => cart.removeFromCart(product)}
-        style={{
-          background: "red",
-          color: "white",
-          padding: 20,
-          margin: 10,
-        }}
-      >
-        Delete from cart
-      </button> */}
     </div>
   );
 };
