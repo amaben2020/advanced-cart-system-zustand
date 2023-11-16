@@ -1,17 +1,18 @@
 import { ReactNode } from "react";
+import IconComponent from "../icon";
 
 const PageLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <>
+    <main className="p-20">
       <header>
-        Header Here Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-        molestiae veniam autem esse totam. Vel harum inventore impedit quam. Qui
-        distinctio consequatur, architecto eius unde minima autem voluptas
-        excepturi id.
+        <nav>
+          <IconComponent name="cart" />
+          ICONS
+        </nav>
       </header>
 
       {children}
-    </>
+    </main>
   );
 };
 

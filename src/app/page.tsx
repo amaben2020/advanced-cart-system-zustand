@@ -5,8 +5,8 @@ import { useCartStore } from "@/store/useCartStore";
 import { useProductsStore } from "@/store/useProductsStore";
 
 import DrawerComponent from "@/components/drawer/Drawer";
+import PageLayout from "@/components/layout/PageLayout";
 import { useEffect } from "react";
-import styles from "./page.module.css";
 
 export default function Home() {
   const { products, loading, error, fetchProducts } = useProductsStore(
@@ -20,8 +20,7 @@ export default function Home() {
   }, [fetchProducts]);
 
   return (
-    <main className={styles.main}>
-      Home
+    <PageLayout>
       <div>
         <h2>Products</h2>
         {loading && <div>loading....</div>}
@@ -34,6 +33,6 @@ export default function Home() {
         </div>
         <DrawerComponent />
       </div>
-    </main>
+    </PageLayout>
   );
 }
