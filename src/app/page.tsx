@@ -3,11 +3,9 @@
 import ProductCard from "@/components/product-card";
 import { useCartStore } from "@/store/useCartStore";
 import { useProductsStore } from "@/store/useProductsStore";
-import { Inter } from "@next/font/google";
+
 import { useEffect } from "react";
 import styles from "./page.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { products, loading, error, fetchProducts } = useProductsStore(

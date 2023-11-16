@@ -9,6 +9,7 @@ type TState = {
 
 type TActions = {
   addToCart: (product: TProduct) => void;
+  removeFromCart: (product: TProduct) => void;
 };
 
 export const useCartStore = create<TState & TActions>((set, get) => ({
@@ -18,6 +19,14 @@ export const useCartStore = create<TState & TActions>((set, get) => ({
   addToCart: (product: TProduct) => {
     set((state) => ({
       cart: [...state.cart, product],
+      totalAmount: 0,
+      totalItems: 0,
+    }));
+  },
+
+  removeFromCart: (product: TProduct) => {
+    set((state) => ({
+      cart: state.cart.filter((elem) => elem.id !== product.id),
       totalAmount: 0,
       totalItems: 0,
     }));
