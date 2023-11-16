@@ -1,9 +1,12 @@
 import { useCartStore } from "@/store/useCartStore";
 import Image from "next/image";
+import { useState } from "react";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
   const cartState = useCartStore((state) => state);
+
+  const [qty, setQty] = useState<number>(0);
 
   return (
     <>
@@ -59,12 +62,20 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                     <div>
                       <h4> Quantity: </h4>
                       <p>{cartItem?.quantity} </p>
+
+                      <select onChange={(e) => setQty(Number(e.target.value))}>
+                        {[1, 2, 3, 4, 5].map((elem) => (
+                          <option value={elem} key={elem}>
+                            {elem}
+                          </option>
+                        ))}
+                      </select>
                       <button
                         onClick={() =>
-                          cartState.updateCartQuantity(cartItem?.id, 5)
+                          cartState.updateCartQuantity(cartItem?.id, qty)
                         }
                       >
-                        5
+                        Update Quantity
                       </button>
                     </div>
 
@@ -97,6 +108,10 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
             ) : (
               <p>You have {cartState.cart.length} cart items</p>
             )}
+
+            <button className="border w-full my-4 p-4 rounded-lg bg-green-700 font-bold text-white hover:bg-green-800">
+              Pay
+            </button>
           </div>
         </div>
       </Drawer>
