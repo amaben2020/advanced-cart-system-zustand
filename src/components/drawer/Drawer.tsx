@@ -1,11 +1,9 @@
 //import styles 👇
-import useToggle from "@/hooks/useToggle";
 import { useCartStore } from "@/store/useCartStore";
 import Image from "next/image";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
-const DrawerComponent = () => {
-  const { isOpen, toggleDrawer } = useToggle();
+const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
   const cartState = useCartStore((state) => state);
   return (
     <>

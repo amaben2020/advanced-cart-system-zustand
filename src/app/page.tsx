@@ -6,6 +6,7 @@ import { useProductsStore } from "@/store/useProductsStore";
 
 import DrawerComponent from "@/components/drawer/Drawer";
 import PageLayout from "@/components/layout/PageLayout";
+import useToggle from "@/hooks/useToggle";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -19,8 +20,10 @@ export default function Home() {
     fetchProducts();
   }, [fetchProducts]);
 
+  const { toggleDrawer, isOpen } = useToggle();
+
   return (
-    <PageLayout>
+    <PageLayout toggleDrawer={toggleDrawer}>
       <div>
         <h2>Products</h2>
         {loading && <div>loading....</div>}
@@ -31,7 +34,7 @@ export default function Home() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-        <DrawerComponent />
+        <DrawerComponent toggleDrawer={toggleDrawer} isOpen={isOpen} />
       </div>
     </PageLayout>
   );
