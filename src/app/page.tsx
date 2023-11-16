@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
-        <h2>Products</h2>
+        <h1 className="my-3">Products</h1>
         {loading && <div>loading....</div>}
         {error && <div className="text-red-700">ERROR....</div>}
 

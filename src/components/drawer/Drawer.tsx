@@ -59,6 +59,13 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                     <div>
                       <h4> Quantity: </h4>
                       <p>{cartItem?.quantity} </p>
+                      <button
+                        onClick={() =>
+                          cartState.updateCartQuantity(cartItem?.id, 5)
+                        }
+                      >
+                        5
+                      </button>
                     </div>
 
                     <div>
