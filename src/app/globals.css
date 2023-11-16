@@ -2,8 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply text-[40px];
+  }
+
+  h3 {
+    @apply text-black text-xl;
+  }
+
+  p {
+    @apply text-black text-base;
+  }
+}
+
 @layer components {
   .card {
-    @apply border p-4 rounded-lg text-blue-dark;
+    @apply border-2 p-4 rounded-lg text-blue-dark;
   }
 }
