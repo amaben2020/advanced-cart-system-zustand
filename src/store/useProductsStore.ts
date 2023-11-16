@@ -14,6 +14,7 @@ export type TProduct = {
   category: string;
   thumbnail: string;
   images: string[];
+  quantity: number;
 };
 export type TStore = {
   products: TProduct[];
