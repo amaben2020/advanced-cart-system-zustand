@@ -41,10 +41,11 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
       set({ products: data.products, loading: false, error: false });
     } catch (error: any) {
       if (error instanceof Error) {
-        // getting access to current state of things
+        // getting access to current state of things if needed
         set((state) => ({
-          ...state,
-          error: error.message,
+          products: [],
+          loading: false,
+          error: true,
         }));
       }
     }
