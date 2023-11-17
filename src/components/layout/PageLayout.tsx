@@ -15,7 +15,7 @@ const PageLayout = ({
     (state: TState) => state.cart,
   );
   return (
-    <main className="p-20">
+    <main className="p-6 lg:p-10 xl:p-20">
       <header>
         <nav className="py-4 px-2 flex">
           <button className="ml-auto relative" onClick={toggleDrawer}>
