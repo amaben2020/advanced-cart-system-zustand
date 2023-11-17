@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
-        <h1 className="my-3">Products</h1>
+        <h1 className="my-5">Products</h1>
         {error && <ApiError />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
           {loading
@@ -41,7 +41,7 @@ export default function Home() {
 
         <DrawerComponent toggleDrawer={toggleDrawer} isOpen={isOpen} />
       </div>
-      <button>Load More Button Here</button>
+      {/* <button>Load More Button Here</button> */}
     </PageLayout>
   );
 }

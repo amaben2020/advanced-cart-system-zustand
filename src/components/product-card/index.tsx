@@ -15,7 +15,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
     <div className="card flex flex-col gap-4 relative">
       {Number(currentProductQty) > 0 && (
         <>
-          <span className="animate-ping absolute inline-flex h-6 w-6 rounded-full bg-green-700 opacity-75 -top-2 -right-2 text-black"></span>
+          <span className="animate-ping absolute inline-flex h-6 w-6 rounded-full bg-green-700 opacity-75 -top-2 -right-3 text-black"></span>
           <p className="absolute -top-2 -right-1 text-[20px]">
             {" "}
             {currentProductQty}
@@ -28,6 +28,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
           alt=""
           fill
           className="absolute top-0 w-full rounded-md"
+          priority
         />
       </div>
 
