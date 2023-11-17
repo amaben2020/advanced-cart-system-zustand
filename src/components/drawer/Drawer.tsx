@@ -16,10 +16,11 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
 
   const [qty, setQty] = useState<number>(0);
 
-  const { isTablet } = useMatchMedia(900);
+  const isTablet = useMatchMedia(900);
 
   return (
     <>
+      <p>{isTablet ? "true" : "false"}</p>
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}

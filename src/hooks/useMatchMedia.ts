@@ -9,9 +9,16 @@ const useMatchMedia = (minWidth: number) => {
       .addEventListener("change", ({ matches }) => {
         setIsTablet(matches);
       });
+
+    return () =>
+      window
+        .matchMedia(`(min-width: ${minWidth}px)`)
+        .removeEventListener("change", ({ matches }) => {
+          setIsTablet(matches);
+        });
   }, [isTablet, minWidth]);
 
-  return { isTablet };
+  return isTablet;
 };
 
 export default useMatchMedia;
