@@ -10,7 +10,6 @@ const PageLayout = ({
   children: ReactNode;
   toggleDrawer: () => void;
 }) => {
-  // const cartState = useCartStore((state) => state.cart);
   const { state: cartState } = useHydrate(
     useCartStore,
     (state: TState) => state.cart,

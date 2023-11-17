@@ -2,12 +2,22 @@
 import { useCartStore } from "@/store/useCartStore";
 import { TProduct } from "@/store/useProductsStore";
 import { truncate } from "@/utils/truncate";
+import Image from "next/image";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
   const cart = useCartStore((state) => state);
 
   return (
     <div className="card flex flex-col gap-4">
+      <div className="relative h-[200px]">
+        <Image
+          src={product.images[0]}
+          alt=""
+          fill
+          className="absolute top-0 w-full rounded-md"
+        />
+      </div>
+
       <h3 className="font-bold">{product.title}</h3>
 
       <p>{truncate(product.description, 45)}</p>
