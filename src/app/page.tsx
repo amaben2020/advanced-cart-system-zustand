@@ -28,9 +28,7 @@ export default function Home() {
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
         <h1 className="my-3">Products</h1>
-
         {error && <ApiError />}
-
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
           {loading
             ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
@@ -40,8 +38,10 @@ export default function Home() {
                 <ProductCard key={product.id} product={product} />
               ))}
         </div>
+
         <DrawerComponent toggleDrawer={toggleDrawer} isOpen={isOpen} />
       </div>
+      <button>Load More Button Here</button>
     </PageLayout>
   );
 }

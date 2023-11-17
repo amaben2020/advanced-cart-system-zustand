@@ -1,4 +1,5 @@
 import useHydrate from "@/hooks/useHydrate";
+import useMatchMedia from "@/hooks/useMatchMedia";
 import { useCartStore } from "@/store/useCartStore";
 import { TProduct, TStore } from "@/store/useProductsStore";
 import Image from "next/image";
@@ -15,6 +16,8 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
 
   const [qty, setQty] = useState<number>(0);
 
+  const { isTablet } = useMatchMedia(900);
+
   return (
     <>
       <Drawer
@@ -22,7 +25,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
         onClose={toggleDrawer}
         direction="right"
         className="rounded-lg border"
-        size="30%"
+        size={isTablet ? "30%" : "70%"}
       >
         <div className="p-5">
           <button className="text-right" onClick={toggleDrawer}>
