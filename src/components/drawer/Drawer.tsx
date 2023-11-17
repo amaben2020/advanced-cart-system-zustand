@@ -1,16 +1,22 @@
+import useHydrate from "@/hooks/useHydrate";
 import { useCartStore } from "@/store/useCartStore";
+import { TProduct, TStore } from "@/store/useProductsStore";
 import Image from "next/image";
 import { useState } from "react";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
-  const cartState = useCartStore((state) => state);
+  const { state: cartState } = useHydrate(
+    useCartStore,
+    (state: TStore) => state,
+  );
+
+  // const cartState = useCartStore((state) => state);
 
   const [qty, setQty] = useState<number>(0);
 
   return (
     <>
-      <button onClick={toggleDrawer}>Show</button>
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
@@ -36,8 +42,8 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
             </svg>
           </button>
           <div className="p-3">
-            {cartState.cart.length > 0 ? (
-              cartState?.cart?.map((cartItem) => {
+            {cartState?.cart?.length > 0 ? (
+              cartState?.cart?.map((cartItem: TProduct) => {
                 return (
                   <div
                     key={cartItem?.id}
@@ -75,7 +81,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                           cartState.updateCartQuantity(cartItem?.id, qty)
                         }
                       >
-                        Update Quantity
+                        Update
                       </button>
                     </div>
 
@@ -106,10 +112,10 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                 );
               })
             ) : (
-              <p>You have {cartState.cart.length} cart items</p>
+              <p>You have {cartState?.cart?.length} cart items</p>
             )}
 
-            <button className="border w-full my-4 p-4 rounded-lg bg-green-700 font-bold text-white hover:bg-green-800">
+            <button className="border w-full my-4 p-4 rounded-lg bg-green-700 font-bold text-white hover:bg-green-800 cursor-not-allowed">
               Pay
             </button>
           </div>
