@@ -20,12 +20,11 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
 
   return (
     <>
-      <p>{isTablet ? "true" : "false"}</p>
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
         direction="right"
-        className="rounded-lg border"
+        className="border rounded-lg"
         size={isTablet ? "30%" : "70%"}
       >
         <div className="p-5">
@@ -51,7 +50,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                 return (
                   <div
                     key={cartItem?.id}
-                    className="my-3 border py-4 flex items-center gap-6"
+                    className="flex items-center gap-6 py-4 my-3 border"
                   >
                     <Image
                       src={
@@ -119,7 +118,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
               <p>You have {cartState?.cart?.length} cart items</p>
             )}
 
-            <button className="border w-full my-4 p-4 rounded-lg bg-green-700 font-bold text-white hover:bg-green-800 cursor-not-allowed">
+            <button className="w-full p-4 my-4 font-bold text-white bg-green-700 border rounded-lg cursor-not-allowed hover:bg-green-800">
               Pay
             </button>
           </div>

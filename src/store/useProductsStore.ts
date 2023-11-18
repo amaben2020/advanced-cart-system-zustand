@@ -21,8 +21,9 @@ export type TStore = {
   loading: boolean;
   error: boolean;
 };
+type TOptions = { limit: number; skip: number };
 type TActions = {
-  fetchProducts: () => Promise<void>;
+  fetchProducts: (options: TOptions) => Promise<void>;
 };
 
 const PRODUCT_API = "https://dummyjson.com/products?ref=hackernoon.com";
@@ -31,10 +32,16 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
   products: [],
   loading: false,
   error: false,
-  fetchProducts: async () => {
+  fetchProducts: async (options: TOptions) => {
     set({ products: [], loading: true, error: false });
     try {
-      const response = await fetch(PRODUCT_API);
+      let query =
+        options.limit ||
+        (options.skip && options?.limit > 0 && options?.skip > 0)
+          ? `${PRODUCT_API}?skip=${options?.skip}&limit=${options?.limit}`
+          : PRODUCT_API;
+
+      const response = await fetch(query);
 
       const data = await response.json();
 
