@@ -13,9 +13,10 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { products, loading, error, fetchProducts } = useProductsStore(
+  const { products, loading, error, count, fetchProducts } = useProductsStore(
     (state) => state,
   );
+  console.log(count);
   const SKIP = 8;
   const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);
 
@@ -49,8 +50,9 @@ export default function Home() {
 
         <div className="flex justify-center mx-auto my-10 text-center">
           <button
-            className="flex items-center gap-2 p-4 text-xl text-center text-white bg-green-700 rounded-lg hover:bg-green-800"
+            className="flex items-center gap-2 p-4 text-xl text-center text-white bg-green-700 rounded-lg hover:bg-green-800 disabled:bg-gray-700 disabled:cursor-not-allowed"
             onClick={incrementLoadMore}
+            disabled={loadMoreLimit >= count!}
           >
             Load More
             <svg

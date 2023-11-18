@@ -20,6 +20,7 @@ export type TStore = {
   products: TProduct[];
   loading: boolean;
   error: boolean;
+  count?: number;
 };
 type TOptions = { limit: number; skip: number };
 type TActions = {
@@ -32,12 +33,11 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
   products: [],
   loading: false,
   error: false,
-  fetchProducts: async (options: TOptions) => {
+  fetchProducts: async (options?: TOptions) => {
     set({ products: [], loading: true, error: false });
     try {
       let query =
-        options.limit ||
-        (options.skip && options?.limit > 0 && options?.skip > 0)
+        options !== undefined
           ? `${PRODUCT_API}?skip=${options?.skip}&limit=${options?.limit}`
           : PRODUCT_API;
 
@@ -45,7 +45,16 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
 
       const data = await response.json();
 
-      set({ products: data.products, loading: false, error: false });
+      // we need this to disable the loadmore button
+      const totalProducts = await fetch(PRODUCT_API);
+      const info = await totalProducts.json();
+
+      set({
+        products: data.products,
+        loading: false,
+        error: false,
+        count: info.products.length,
+      });
     } catch (error: any) {
       if (error instanceof Error) {
         // getting access to current state of things if needed
