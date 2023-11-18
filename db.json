@@ -63,6 +63,13 @@
       "firstname": null,
       "lastname": "Uzor",
       "id": 8
+    },
+    {
+      "email": "bambutest@mailinator.com",
+      "password": "$2a$10$0qxDd962D0ElNsW.REZlq.yz698EKp0DWHKgz7J/eC243WpY5AIEW",
+      "firstname": "Simon",
+      "lastname": "Tyson",
+      "id": 9
     }
   ],
   "register": []

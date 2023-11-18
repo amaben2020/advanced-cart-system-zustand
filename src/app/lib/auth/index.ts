@@ -28,7 +28,7 @@ export const authOptions = {
   providers: [
     // you simply pass in this id to the signIn and this returns a token on signIn
     CredentialsProvider({
-      name: "login",
+      name: "credentials",
       credentials: {
         email: {
           label: "Email",
@@ -77,5 +77,6 @@ export const authOptions = {
       return session;
     },
   },
+  debug: process.env.NODE_ENV === "development",
 };
 export default authOptions;
