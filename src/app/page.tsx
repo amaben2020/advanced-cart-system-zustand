@@ -1,7 +1,6 @@
 "use client";
 
 import ProductCard from "@/components/product-card";
-import { useCartStore } from "@/store/useCartStore";
 import { useProductsStore } from "@/store/useProductsStore";
 
 import DrawerComponent from "@/components/drawer/Drawer";
@@ -16,8 +15,6 @@ export default function Home() {
     (state) => state,
   );
 
-  const cart = useCartStore((state) => state);
-
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
@@ -29,7 +26,7 @@ export default function Home() {
       <div>
         <h1 className="my-5">Products</h1>
         {error && <ApiError />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
           {loading
             ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
                 <LoadingCard key={i} />

@@ -21,3 +21,6 @@ export default useHydrate;
 // Use useEffect to set the local state with the store data. This way, the local state will be updated when mounting the component, avoiding inconsistencies.
 
 // Use the local state of the created cart to render the items instead of directly using the state of the cart in the store.
+
+//Hydration 101
+// Hydration errors occur when the server-rendered HTML content and the client-side JavaScript do not match. In a Next.js application, this typically happens when the rendered HTML on the server side does not match what the client-side JavaScript expects.
