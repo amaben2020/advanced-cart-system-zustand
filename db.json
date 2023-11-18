@@ -1,3 +1,69 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$l1uQdK./oDs6E4D97qhwseLeIzrW0iW74/EgAd7.9c6joAlh8e3dy",
+      "firstname": "Olivier",
+      "lastname": "Monge",
+      "age": 32,
+      "id": 1
+    },
+    {
+      "email": "oliviesr@mail.com",
+      "password": "$2a$10$kXSZHsk3NANCGl72XPaIvuani/83GOj/4ONH5wZ0RB6z8q4v8MTzq",
+      "firstname": "Olivsier",
+      "lastname": "Mongse",
+      "age": "32",
+      "csrfToken": "23998157c92bafe280931205e5dd11dedb3185a2ec7094e4daf99592fcd8fc87",
+      "callbackUrl": "http://localhost:3000/",
+      "json": "true",
+      "id": 2
+    },
+    {
+      "email": "oliviekdsr@mail.com",
+      "password": "$2a$10$8QMN44zG2sDcajqTDYSstO./0Q/IlxrhoJyUf2Qwia0cIfy2aQKCG",
+      "firstname": "Olivier",
+      "lastname": "Monge",
+      "age": 32,
+      "id": 3
+    },
+    {
+      "email": "oliviekdsr@lkmail.com",
+      "password": "$2a$10$Eon.oGDVgqpi5KumT7ky8OGTO7L.5Nys8K5SrZQqHIMvgIEG3zO0S",
+      "firstname": "Olivier",
+      "lastname": "Monge",
+      "age": 32,
+      "id": 4
+    },
+    {
+      "email": "oliviesdr@gmail.com",
+      "password": "$2a$10$gDT359X7kigUeBWXnjbQ4eQoV6R2mZClbG6Ov6KtkaKdtezVW419K",
+      "firstname": "Olivsiere",
+      "lastname": "Twister",
+      "age": 32,
+      "id": 5
+    },
+    {
+      "email": "olivierjnkkj@mail.com",
+      "password": "$2a$10$n7VUNo7Ng.btfeA7kI5DaObqj2fUjPhzM8Fqbsm3.QPeJI3gUuR1.",
+      "firstname": null,
+      "lastname": "Uzochukwu",
+      "id": 6
+    },
+    {
+      "email": "olivierjnksakj@mail.com",
+      "password": "$2a$10$Y8wPMJGSlF4TO7vlHhcFVeaFNwuHE9ZOe6YwHli4Hfr/W9WhQbBkK",
+      "firstname": null,
+      "lastname": "Uzochukwu",
+      "id": 7
+    },
+    {
+      "email": "ben@gmail.com",
+      "password": "$2a$10$ursxGGu2W44Ov8Q6E5V.Ue.xqYY2gilzA7H0tY0pvgwVXZBnKPjKS",
+      "firstname": null,
+      "lastname": "Uzor",
+      "id": 8
+    }
+  ],
+  "register": []
 }

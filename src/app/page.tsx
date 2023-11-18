@@ -8,6 +8,7 @@ import ApiError from "@/components/elements/error/ApiError";
 import PageLayout from "@/components/layout/PageLayout";
 import LoadingCard from "@/components/product-card/loading-card/loading-card";
 import useToggle from "@/hooks/useToggle";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -21,9 +22,12 @@ export default function Home() {
 
   const { toggleDrawer, isOpen } = useToggle();
 
+  const session = useSession();
+  console.log(session);
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
+        <div></div>
         <h1 className="my-5">Products</h1>
         {error && <ApiError />}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
