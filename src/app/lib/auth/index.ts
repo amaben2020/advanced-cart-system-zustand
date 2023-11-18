@@ -20,16 +20,16 @@ export const authOptions = {
     maxAge: 3000,
   },
 
-  // pages: {
-  //   signIn: "/auth/signin",
-  //   signOut: "/auth/signout",
-  //   error: "/auth/error", // Error code passed in query string as ?error=
-  // },
+  pages: {
+    signIn: "/auth/login",
+    signOut: "/auth/login",
+  },
   providers: [
     // you simply pass in this id to the signIn and this returns a token on signIn
     CredentialsProvider({
       name: "credentials",
       credentials: {
+        // leave empty if using custom ui
         email: {
           label: "Email",
           type: "email",
@@ -44,10 +44,7 @@ export const authOptions = {
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" },
           });
-          console.log(credentials);
           const user = await res.json();
-
-          console.log(user);
           if (res.ok && user) {
             return user;
           }
