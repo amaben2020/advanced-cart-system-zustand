@@ -1,4 +1,5 @@
 "use client";
+import { useUserStore } from "@/store/useUser";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, useState } from "react";
 
@@ -7,6 +8,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const userState = useUserStore((state) => state);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -22,11 +25,19 @@ const Login = () => {
       const data = await signIn("credentials", {
         email: userInfo.email,
         password: userInfo.password,
-        callbackUrl: "http://localhost:3000",
+        callbackUrl: "/",
         redirect: true,
       });
 
       console.log(data);
+
+      if (data) {
+        userState.addUser({
+          firstName: data.user.firstname,
+          lastName: data.user.lastname,
+          accessToken: data.accessToken,
+        });
+      }
     } catch (error) {
       console.log(error);
     }

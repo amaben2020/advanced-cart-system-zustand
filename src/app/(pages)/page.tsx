@@ -9,7 +9,6 @@ import PageLayout from "@/components/layout/PageLayout";
 import LoadingCard from "@/components/product-card/loading-card/loading-card";
 import useLoadMore from "@/hooks/useLoadMore";
 import useToggle from "@/hooks/useToggle";
-import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -28,9 +27,6 @@ export default function Home() {
   }, [fetchProducts, loadMoreLimit]);
 
   const { toggleDrawer, isOpen } = useToggle();
-
-  const session = useSession();
-  console.log(session);
 
   if (error) {
     return (

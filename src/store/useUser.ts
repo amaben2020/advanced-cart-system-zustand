@@ -19,6 +19,7 @@ export const useUserStore = create<TUserStore>((set, get) => ({
   },
 
   addUser: (data: TUser) => {
+    console.log("DATA", data);
     set({
       user: data,
     });
