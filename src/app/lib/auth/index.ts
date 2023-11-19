@@ -17,7 +17,7 @@ export const authOptions = {
   site: process.env.NEXTAUTH_URL,
   session: {
     strategy,
-    maxAge: 3000,
+    maxAge: 3000 * 10000,
   },
 
   pages: {
