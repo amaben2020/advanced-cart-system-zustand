@@ -5,6 +5,7 @@ import { useProductsStore } from "@/store/useProductsStore";
 
 import DrawerComponent from "@/components/drawer/Drawer";
 import ApiError from "@/components/elements/error/ApiError";
+import Sidebar from "@/components/elements/sidebar";
 import PageLayout from "@/components/layout/PageLayout";
 import LoadingCard from "@/components/product-card/loading-card/loading-card";
 import useLoadMore from "@/hooks/useLoadMore";
@@ -42,9 +43,9 @@ export default function Home() {
         <div></div>
         <h1 className="my-5">Products</h1>
 
-        <div className="grid grid-cols-5">
+        <div className="grid grid-cols-5 gap-x-5">
           <div className="col-span-5 mb-10 md:col-span-1">
-            Advanced Filtration Here
+            <Sidebar />
           </div>
           <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
             {loading

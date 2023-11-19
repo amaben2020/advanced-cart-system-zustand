@@ -22,22 +22,12 @@ const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const data = await signIn("credentials", {
+      await signIn("credentials", {
         email: userInfo.email,
         password: userInfo.password,
         callbackUrl: "/",
         redirect: true,
       });
-
-      console.log(data);
-
-      if (data) {
-        userState.addUser({
-          firstName: data.user.firstname,
-          lastName: data.user.lastname,
-          accessToken: data.accessToken,
-        });
-      }
     } catch (error) {
       console.log(error);
     }
