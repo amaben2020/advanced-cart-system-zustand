@@ -38,7 +38,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
 
       {/* TODO: use stars here */}
       <p>{product.rating}</p>
-      <p className="font-bold">${product.price.toFixed(2)}</p>
+      <p className="font-bold">₦{product.price.toFixed(2)}</p>
 
       <button
         className="w-full p-3 mt-6 font-bold text-white bg-green-700 rounded-md"

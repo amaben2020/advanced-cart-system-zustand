@@ -56,6 +56,9 @@ dependencies:
   react-modern-drawer:
     specifier: ^1.2.2
     version: 1.2.2(react@18.2.0)
+  react-paystack:
+    specifier: ^4.0.3
+    version: 4.0.3(react-dom@18.2.0)(react@18.2.0)
   typescript:
     specifier: 5.2.2
     version: 5.2.2
@@ -2809,6 +2812,16 @@ packages:
       react: '>16.0.0'
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-paystack@4.0.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ruu94Qrvi7QHK1axrHRShUebka68G3UyGIndVFPCjs3rddBOkLiorF6GJ98FW9lq4ov5M4adh4g03F6aOuJmRA==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:
