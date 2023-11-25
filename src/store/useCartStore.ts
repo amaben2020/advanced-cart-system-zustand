@@ -13,6 +13,7 @@ type TActions = {
   addToCart: (product: TProduct) => void;
   removeFromCart: (product: TProduct) => void;
   updateCartQuantity: (id: number, quantity: number) => void;
+  clearCart: () => void;
 };
 
 export const useCartStore = create(
@@ -69,17 +70,29 @@ export const useCartStore = create(
         const immutableState = [...cartState];
 
         if (cartState.length > 0) {
-          let itemToUpdate: any = immutableState.find((elem) => elem.id === id);
+          let itemToUpdate: any = immutableState.find(
+            (elem) => elem?.id === id,
+          );
 
           if (itemToUpdate) {
             itemToUpdate.quantity = quantity;
+            // itemToUpdate.price = itemToUpdate.price * quantity;
+
+            console.log("cartState in update", cartState);
             set({
               cart: immutableState,
-              // totalAmount: cartState.totalAmount + 1,
-              // totalPrice: cartState.totalPrice + itemToUpdate?.price,
+              totalAmount: cartState?.totalAmount + 1,
+              totalPrice: cartState?.totalPrice * quantity,
             });
           }
         }
+      },
+      clearCart: () => {
+        set({
+          cart: [],
+          totalPrice: 0,
+          totalAmount: 0,
+        });
       },
     }),
     {

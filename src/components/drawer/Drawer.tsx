@@ -15,21 +15,25 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
     (state: TStore) => state,
   );
 
-  // const cartState = useCartStore((state) => state);
-
+  console.log(cartState);
   const [qty, setQty] = useState<number>(0);
 
   const isTablet = useMatchMedia(900);
 
-  const PayNow = withPaystack(Button)("benneth@bamble.io", 500);
+  const sumGrandTotal = cartState?.cart?.reduce((acc: any, cv: any) => {
+    acc += cv.quantity * cv.price;
 
+    return acc;
+  }, 0);
+  const USER_EMAIL = "benneth@bamble.io";
+  const PayNow = withPaystack(Button)(USER_EMAIL, sumGrandTotal);
   return (
     <Drawer
       open={isOpen}
       onClose={toggleDrawer}
       direction="right"
       className="border rounded-lg"
-      size={isTablet ? "30%" : "70%"}
+      size={isTablet ? "30%" : "50%"}
     >
       <div className="p-5">
         <button className="text-right" onClick={toggleDrawer}>
@@ -73,6 +77,10 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                   </div>
 
                   <div>
+                    Sub Total: {Number(cartItem?.price * cartItem.quantity)}
+                  </div>
+
+                  <div>
                     <h4> Quantity: </h4>
                     <p>{cartItem?.quantity} </p>
 
@@ -84,9 +92,9 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                       ))}
                     </select>
                     <button
-                      onClick={() =>
-                        cartState.updateCartQuantity(cartItem?.id, qty)
-                      }
+                      onClick={() => {
+                        cartState.updateCartQuantity(cartItem?.id, qty);
+                      }}
                     >
                       Update
                     </button>
@@ -122,6 +130,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
             <p>You have {cartState?.cart?.length} cart items</p>
           )}
 
+          <p className="my-4">Grand Total : ₦ {Number(sumGrandTotal)} </p>
           {PayNow}
         </div>
       </div>
