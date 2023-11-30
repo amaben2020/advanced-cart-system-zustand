@@ -10,7 +10,7 @@ const Register = () => {
     const password = formData.get("password");
 
     if (email && password) {
-      const response = await fetch("http://localhost:3000/api/signup", {
+      const response = await fetch(`${process.env.VERCEL}/api/signup`, {
         method: "POST",
         body: JSON.stringify({
           email,
@@ -34,7 +34,7 @@ const Register = () => {
   };
   return (
     <div>
-      Register
+      Register {process?.env?.VERCEL}
       <form action={handleSubmit} className="flex flex-col p-20 border">
         <input
           className="p-3 my-4 text-black border-2 rounded-md"

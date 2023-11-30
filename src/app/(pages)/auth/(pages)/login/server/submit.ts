@@ -7,7 +7,7 @@ export const handleSubmit = async (formData: FormData) => {
     const data = await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
-      callbackUrl: "http://localhost:3000",
+      callbackUrl: process.env.VERCEL,
       redirect: true,
     });
 
