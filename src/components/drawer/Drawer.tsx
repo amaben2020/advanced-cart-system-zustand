@@ -84,7 +84,11 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                     <h4> Quantity: </h4>
                     <p>{cartItem?.quantity} </p>
 
-                    <select onChange={(e) => setQty(Number(e.target.value))}>
+                    <select
+                      onChange={(e) => {
+                        setQty(Number(e.target.value));
+                      }}
+                    >
                       {[1, 2, 3, 4, 5].map((elem) => (
                         <option value={elem} key={elem}>
                           {elem}
@@ -92,6 +96,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                       ))}
                     </select>
                     <button
+                      className="p-2 border border-green-700 rounded-lg"
                       onClick={() => {
                         cartState.updateCartQuantity(cartItem?.id, qty);
                       }}

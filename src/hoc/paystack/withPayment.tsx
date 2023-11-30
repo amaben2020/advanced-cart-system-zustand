@@ -1,32 +1,24 @@
-// TODO: extract to payment module
-// https://www.npmjs.com/package/react-paystack
-
 import useHydrate from "@/hooks/useHydrate";
 import { useCartStore } from "@/store/useCartStore";
 import { TStore } from "@/store/useProductsStore";
-import { useCallback } from "react";
 import { usePaystackPayment } from "react-paystack";
 
 const withPaystack = (Component: any) => {
+  // eslint-disable-next-line react/display-name
   return (email: string, totalAmount: number) => {
     const { state: cartState } = useHydrate(
       useCartStore,
       (state: TStore) => state,
     );
 
-    console.log(cartState?.clearCart);
-
     // you can call this function anything
-    const onSuccess = useCallback(
-      (reference: any) => {
-        // Implementation for whatever you want to do with reference and after success call. i.e toast, post to airtable etc
-        console.log("REFERENCE", reference);
-        if (reference.message === "Approved") {
-          cartState?.clearCart();
-        }
-      },
-      [cartState],
-    );
+    const onSuccess = (reference: any) => {
+      // Implementation for whatever you want to do with reference and after success call. i.e toast, post to airtable etc
+      console.log("REFERENCE", reference);
+      if (reference.message === "Approved") {
+        cartState?.clearCart();
+      }
+    };
 
     // you can call this function anything
     const onClose = () => {
@@ -48,13 +40,6 @@ const withPaystack = (Component: any) => {
           initializePayment(onSuccess, onClose);
         }}
       />
-      //   <button
-      //   onClick={() => {
-      //     initializePayment(onSuccess, onClose);
-      //   }}
-      // >
-      //     Pay
-      // </button>
     );
   };
 };
