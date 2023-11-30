@@ -10,15 +10,18 @@ const Register = () => {
     const password = formData.get("password");
 
     if (email && password) {
-      const response = await fetch(`${process.env.VERCEL}/api/signup`, {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          password,
-          firstName,
-          lastName,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_URL!}/api/signup`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            password,
+            firstName,
+            lastName,
+          }),
+        },
+      );
 
       const data = await response.json();
 

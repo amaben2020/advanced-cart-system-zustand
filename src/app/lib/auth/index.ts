@@ -14,7 +14,7 @@ type TRegisterCredentials = {
 };
 
 export const authOptions = {
-  site: process.env.NEXTAUTH_URL,
+  site: process.env.NEXT_PUBLIC_URL!,
   session: {
     strategy,
     maxAge: 3000 * 10000,
