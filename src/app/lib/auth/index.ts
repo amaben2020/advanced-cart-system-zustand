@@ -74,7 +74,6 @@ export const authOptions = {
     session: async ({ session, token }: { session: Session; token: JWT }) => {
       //@ts-ignore
       session.user = token.user?.user as User;
-
       return session;
     },
   },
