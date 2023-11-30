@@ -10,16 +10,12 @@ import PageLayout from "@/components/layout/PageLayout";
 import LoadingCard from "@/components/product-card/loading-card/loading-card";
 import useLoadMore from "@/hooks/useLoadMore";
 import useToggle from "@/hooks/useToggle";
-import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 export default function Home() {
   const { products, loading, error, count, fetchProducts } = useProductsStore(
     (state) => state,
   );
-
-  const session = useSession();
-  console.log(session);
 
   const SKIP = 8;
   const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);

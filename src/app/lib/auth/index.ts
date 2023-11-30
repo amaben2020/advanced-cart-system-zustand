@@ -39,11 +39,14 @@ export const authOptions = {
       },
       async authorize(credentials) {
         try {
-          const res = await fetch(`${process.env.NEXTAUTH_URL}/api/signin`, {
-            method: "POST",
-            body: JSON.stringify(credentials),
-            headers: { "Content-Type": "application/json" },
-          });
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_URL!}/api/signin`,
+            {
+              method: "POST",
+              body: JSON.stringify(credentials),
+              headers: { "Content-Type": "application/json" },
+            },
+          );
 
           const user = await res.json();
 
@@ -74,6 +77,7 @@ export const authOptions = {
     session: async ({ session, token }: { session: Session; token: JWT }) => {
       //@ts-ignore
       session.user = token.user?.user as User;
+
       return session;
     },
   },

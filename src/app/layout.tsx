@@ -1,7 +1,4 @@
-import { unstable_getServerSession } from "next-auth";
-
 import "./globals.css";
-import authOptions from "./lib/auth";
 import NextAuthSessionProvider from "./providers/session-provider";
 
 export default async function RootLayout({
@@ -9,9 +6,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await unstable_getServerSession(authOptions);
-
-  console.log(session);
   return (
     <html lang="en">
       <title> Product App </title>
@@ -22,9 +16,7 @@ export default async function RootLayout({
       <head />
 
       <body>
-        <NextAuthSessionProvider session={session}>
-          {children}
-        </NextAuthSessionProvider>
+        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
       </body>
     </html>
   );
