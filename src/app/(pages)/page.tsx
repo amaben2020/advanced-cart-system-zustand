@@ -44,9 +44,7 @@ export default function Home() {
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
-        <div></div>
         <h1 className="my-5">Products</h1>
-
         <div className="grid grid-cols-5 gap-x-5">
           <div className="col-span-5 mb-10 md:col-span-1">
             <Sidebar />
@@ -85,7 +83,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         <DrawerComponent toggleDrawer={toggleDrawer} isOpen={isOpen} />
       </div>
       {/* <button>Load More Button Here</button> */}

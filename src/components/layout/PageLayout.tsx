@@ -19,13 +19,15 @@ const PageLayout = ({
 
   const session = useSession();
 
+  console.log(session);
+
   return (
     <main className="p-6 lg:p-10 xl:p-10 2xl:p-20">
       <header>
         <nav className="flex px-2 py-4">
           <div>
             {session.data && (
-              <p>Welcome, {session.data?.user?.user?.lastname}</p>
+              <p>Welcome, {session.data?.user?.user?.lastName}</p>
             )}
           </div>
 

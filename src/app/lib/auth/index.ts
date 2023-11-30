@@ -38,7 +38,6 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("credentials", credentials);
         try {
           const res = await fetch(`${process.env.NEXTAUTH_URL}/api/signin`, {
             method: "POST",
@@ -69,10 +68,12 @@ export const authOptions = {
       if (token && user) {
         token.user = user;
       }
+
       return token;
     },
     session: async ({ session, token }: { session: Session; token: JWT }) => {
-      session.user = token.user as User;
+      //@ts-ignore
+      session.user = token.user?.user as User;
 
       return session;
     },
