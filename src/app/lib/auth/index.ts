@@ -8,8 +8,8 @@ const strategy: SessionStrategy = "jwt";
 type TRegisterCredentials = {
   email: string;
   password: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   age: number;
 };
 
@@ -38,13 +38,16 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        console.log("credentials", credentials);
         try {
-          const res = await fetch("http://localhost:8000/login", {
+          const res = await fetch(`${process.env.NEXTAUTH_URL}/api/signin`, {
             method: "POST",
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" },
           });
+
           const user = await res.json();
+
           if (res.ok && user) {
             return user;
           }

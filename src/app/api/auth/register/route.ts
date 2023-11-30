@@ -1,12 +1,10 @@
-// pages/api/example.js
-
 import { NextRequest } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   try {
     const request = await req.json();
 
-    const data = await fetch("http://localhost:8000/register", {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/signup`, {
       method: "POST",
       body: JSON.stringify(request),
       headers: { "Content-Type": "application/json" },
@@ -14,7 +12,7 @@ export const POST = async (req: NextRequest) => {
 
     const {
       accessToken,
-      user: { firstname, email, age, id, lastname },
+      user: { firstName, email, lastName },
     } = await data.json();
 
     return Response.json({
@@ -22,11 +20,9 @@ export const POST = async (req: NextRequest) => {
       statusText: "User registration successful",
       user: {
         accessToken,
-        firstname,
+        firstName,
         email,
-        age,
-        id,
-        lastname,
+        lastName,
       },
     });
   } catch (error) {

@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await signIn("credentials", {
-        email: userInfo.email,
+        email: userInfo?.email,
         password: userInfo.password,
         callbackUrl: "/",
         redirect: true,

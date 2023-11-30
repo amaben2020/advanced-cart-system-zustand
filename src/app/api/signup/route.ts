@@ -20,6 +20,7 @@ export const POST = async (req: NextRequest) => {
     if (userInDb) {
       return Response.json({
         error: `User with ${request?.email} already exists`,
+        status: 401,
       });
     }
 

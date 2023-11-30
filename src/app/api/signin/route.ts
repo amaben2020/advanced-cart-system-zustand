@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { NextRequest } from "next/server";
 export const POST = async (req: NextRequest) => {
   try {
-    // dCDonnect syncs your db with mongoose
+    // dCDonnect syncs your db with mongoose, always invoke first
     dbConnect();
 
     const { email, password } = await req.json();
@@ -14,13 +14,11 @@ export const POST = async (req: NextRequest) => {
       email: email,
     }).exec();
 
-    // decrypt password
+    // decrypt password to compare with raw password
     const decryptedPassword = await bcrypt.compare(
       password,
       userInDb?.password,
     );
-
-    // return Token TODO:
 
     const token = jwt.sign(
       {
@@ -32,7 +30,7 @@ export const POST = async (req: NextRequest) => {
           email: userInDb?.email,
         },
       },
-      "secret",
+      process.env.JWT_SECRET!,
     );
 
     // if pwd in db is same as decrypted
@@ -47,8 +45,8 @@ export const POST = async (req: NextRequest) => {
       });
     } else {
       return Response.json({
-        status: 301,
-        statusText: "Password doesnt match",
+        status: 401,
+        statusText: "Password incorrect",
       });
     }
   } catch (error) {

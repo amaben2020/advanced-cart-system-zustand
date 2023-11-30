@@ -5,24 +5,29 @@ const Register = () => {
     "use server";
 
     const email = formData.get("email");
-    const lastname = formData.get("lastName");
-    const firstname = formData.get("firstName");
+    const lastName = formData.get("lastName");
+    const firstName = formData.get("firstName");
     const password = formData.get("password");
 
     if (email && password) {
-      const response = await fetch("http://localhost:3000/api/auth/register", {
+      const response = await fetch("http://localhost:3000/api/signup", {
         method: "POST",
         body: JSON.stringify({
           email,
           password,
-          firstname,
-          lastname,
+          firstName,
+          lastName,
         }),
       });
 
       const data = await response.json();
 
-      if (data.status === 200 && data.user.accessToken) {
+      console.log(data);
+
+      if (
+        data.status === 200 &&
+        data.statusText === "User registration successful"
+      ) {
         redirect("/auth/login");
       }
     }
