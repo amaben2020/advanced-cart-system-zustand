@@ -1,5 +1,4 @@
 "use client";
-import { useUserStore } from "@/store/useUser";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, useState } from "react";
 
@@ -9,8 +8,6 @@ const Login = () => {
     password: "",
   });
 
-  const userState = useUserStore((state) => state);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
 
@@ -19,11 +16,15 @@ const Login = () => {
       [name]: e.target.value,
     }));
   };
+  console.log(userInfo);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      if (!userInfo.email || userInfo.email.length === 0) {
+        alert("You must insert email");
+      }
       await signIn("credentials", {
-        email: userInfo?.email,
+        email: userInfo.email,
         password: userInfo.password,
         callbackUrl: "/",
         redirect: true,
@@ -42,12 +43,14 @@ const Login = () => {
           className="p-3 my-4 text-black border-2 rounded-md"
           type="email"
           name="email"
+          value={userInfo?.email}
         />
         <input
           onChange={handleChange}
           className="p-3 my-4 text-black border-2 rounded-md"
           type="password"
           name="password"
+          value={userInfo?.password}
         />
 
         <button type="submit">Login</button>
