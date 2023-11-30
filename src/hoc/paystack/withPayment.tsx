@@ -12,7 +12,7 @@ const withPaystack = (Component: any) => {
     );
 
     // you can call this function anything
-    const onSuccess = (reference: any) => {
+    const onSuccess = (reference: Record<string, string>) => {
       // Implementation for whatever you want to do with reference and after success call. i.e toast, post to airtable etc
       console.log("REFERENCE", reference);
       if (reference.message === "Approved") {
@@ -37,7 +37,7 @@ const withPaystack = (Component: any) => {
     return (
       <Component
         onClick={() => {
-          initializePayment(onSuccess, onClose);
+          initializePayment(onSuccess as () => void, onClose);
         }}
       />
     );
