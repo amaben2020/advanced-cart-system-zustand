@@ -27,7 +27,7 @@ const PageLayout = ({
         <nav className="flex px-2 py-4">
           <div>
             {session.data && (
-              <p>Welcome, {session.data?.user?.user?.lastName}</p>
+              <p>Welcome, {session?.data?.user?.user?.firstName}</p>
             )}
           </div>
 

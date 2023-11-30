@@ -37,9 +37,6 @@ export default function Home() {
     );
   }
 
-  console.log("Vercel url", process.env.VERCEL);
-  console.log(process.env.NEXTAUTH_URL);
-
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
