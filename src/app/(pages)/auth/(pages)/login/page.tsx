@@ -16,7 +16,7 @@ const Login = () => {
       [name]: e.target.value,
     }));
   };
-  console.log(userInfo);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
