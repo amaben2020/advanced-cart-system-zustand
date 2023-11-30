@@ -22,6 +22,7 @@ const Login = () => {
     try {
       if (!userInfo.email || userInfo.email.length === 0) {
         alert("You must insert email");
+        return;
       }
       await signIn("credentials", {
         email: userInfo.email,
