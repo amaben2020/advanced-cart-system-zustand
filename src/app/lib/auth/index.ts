@@ -81,7 +81,6 @@ export const authOptions = {
       return session;
     },
   },
-  debug: process.env.NODE_ENV === "development",
   secret: process.env.NEXTAUTH_SECRET!,
 };
 export default authOptions;
