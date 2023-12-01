@@ -20,10 +20,15 @@ export const POST = async (req: NextRequest) => {
     }).exec();
 
     if (userInDb) {
-      return Response.json({
-        error: `User with ${request?.email} already exists`,
-        status: 401,
-      });
+      return Response.json(
+        {
+          message: `User with ${request?.email} already exists`,
+        },
+        {
+          status: 401,
+          statusText: `User with ${request?.email} already exists`,
+        },
+      );
     }
 
     const userInfo = await User.create({
@@ -33,14 +38,16 @@ export const POST = async (req: NextRequest) => {
       email: request.email,
     });
 
-    console.log(userInfo);
-
     if (userInfo?._id) {
-      return Response.json({
-        status: 200,
-        statusText: "User registration successful",
-        user: userInfo,
-      });
+      return Response.json(
+        {
+          user: userInfo,
+        },
+        {
+          status: 200,
+          statusText: "User registration successful",
+        },
+      );
     }
   } catch (error) {
     console.log(error);

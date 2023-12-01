@@ -35,19 +35,29 @@ export const POST = async (req: NextRequest) => {
 
     // if pwd in db is same as decrypted
     if (decryptedPassword) {
-      return Response.json({
-        status: 200,
-        statusText: "User login successful",
-        user: {
-          user: userInDb,
-          token,
+      return Response.json(
+        {
+          user: {
+            user: userInDb,
+            token,
+          },
         },
-      });
+        {
+          status: 200,
+          statusText: "User login successful",
+        },
+      );
     } else {
-      return Response.json({
-        status: 401,
-        statusText: "Password incorrect",
-      });
+      return Response.json(
+        {
+          status: 401,
+          statusText: "Password incorrect",
+        },
+        {
+          status: 401,
+          statusText: "Password incorrect",
+        },
+      );
     }
   } catch (error) {
     console.log(error);
