@@ -23,11 +23,6 @@ const Register = () => {
         },
       );
 
-      console.log(
-        "`${process.env.NEXT_PUBLIC_URL!}/api/signup`",
-        `${process.env.NEXT_PUBLIC_URL!}/api/signup`,
-      );
-
       const data = await response.json();
 
       if (

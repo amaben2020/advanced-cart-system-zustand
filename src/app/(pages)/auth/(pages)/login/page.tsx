@@ -1,4 +1,7 @@
 "use client";
+import EyeClosed from "@/assets/svgs/EyeClosed";
+import EyeOpen from "@/assets/svgs/EyeOpen";
+import useTogglePasswordVisibility from "@/hooks/useTogglePasswordVisibility";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, useState } from "react";
 
@@ -7,6 +10,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const { handleToggle, showPassword, icon } = useTogglePasswordVisibility();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -24,6 +29,7 @@ const Login = () => {
         alert("You must insert email");
         return;
       }
+
       await signIn("credentials", {
         email: userInfo.email,
         password: userInfo.password,
@@ -46,13 +52,22 @@ const Login = () => {
           name="email"
           value={userInfo?.email}
         />
-        <input
-          onChange={handleChange}
-          className="p-3 my-4 text-black border-2 rounded-md"
-          type="password"
-          name="password"
-          value={userInfo?.password}
-        />
+
+        <div className="relative">
+          <input
+            onChange={handleChange}
+            className="w-full p-3 my-4 text-black border-2 rounded-md"
+            type={showPassword ? "password" : "text"}
+            name="password"
+            value={userInfo?.password}
+          />
+          <span
+            className="absolute z-10 cursor-pointer top-[40%] right-4"
+            onClick={handleToggle}
+          >
+            {icon === "eye-closed" ? <EyeClosed /> : <EyeOpen />}
+          </span>
+        </div>
 
         <button type="submit">Login</button>
       </form>
