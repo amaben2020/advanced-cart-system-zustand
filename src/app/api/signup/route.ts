@@ -9,6 +9,8 @@ export const POST = async (req: NextRequest) => {
     dbConnect();
     const request = await req.json();
 
+    console.log(request);
+
     // check if email exists already in DB and return DB
     const saltRounds = 10;
     const hash = bcrypt.hashSync(request.password, saltRounds);
@@ -30,6 +32,8 @@ export const POST = async (req: NextRequest) => {
       lastName: request.lastName,
       email: request.email,
     });
+
+    console.log(userInfo);
 
     if (userInfo?._id) {
       return Response.json({

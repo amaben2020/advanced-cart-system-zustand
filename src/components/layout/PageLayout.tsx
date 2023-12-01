@@ -19,6 +19,10 @@ const PageLayout = ({
 
   const session = useSession();
 
+  console.log("AUTH URL", process.env.NEXTAUTH_URL);
+  console.log("VERCEL URL", process.env.VERCEL);
+  console.log("AUTH URL", process.env.NEXT_PUBLIC_URL);
+
   return (
     <main className="p-6 lg:p-10 xl:p-10 2xl:p-20">
       <header>
