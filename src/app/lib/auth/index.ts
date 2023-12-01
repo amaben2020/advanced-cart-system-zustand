@@ -10,11 +10,10 @@ type TRegisterCredentials = {
   password: string;
   firstName: string;
   lastName: string;
-  age: number;
 };
 
 export const authOptions = {
-  site: `${process.env.NEXT_PUBLIC_URL!}/`,
+  site: process.env.NEXT_PUBLIC_URL!,
   session: {
     strategy,
     maxAge: 3000 * 10000,
