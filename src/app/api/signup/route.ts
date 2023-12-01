@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 export const POST = async (req: NextRequest) => {
   try {
     // dCDonnect syncs your db with mongoose
-    dbConnect();
+    await dbConnect();
     const request = await req.json();
 
     console.log(request);

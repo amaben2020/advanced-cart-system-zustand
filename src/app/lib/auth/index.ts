@@ -20,8 +20,8 @@ export const authOptions = {
   },
 
   pages: {
-    signIn: "/auth/login",
-    signOut: "/auth/login",
+    signIn: `${process.env.NEXT_PUBLIC_URL!}/auth/login`,
+    signOut: `${process.env.NEXT_PUBLIC_URL!}/auth/login`,
   },
   providers: [
     // you simply pass in this id to the signIn and this returns a token on signIn
@@ -48,8 +48,6 @@ export const authOptions = {
           );
 
           const user = await res.json();
-
-          console.log("USER", user);
 
           if (res.ok && user) {
             return user;
