@@ -19,6 +19,8 @@ export default function Home() {
     (state) => state,
   );
 
+  console.log(products);
+
   const SKIP = 8;
   const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);
 
