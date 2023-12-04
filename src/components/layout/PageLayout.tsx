@@ -3,7 +3,7 @@ import useHydrate from "@/hooks/useHydrate";
 import { TState, useCartStore } from "@/store/useCartStore";
 import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
-import IconComponent from "../icon";
+import IconComponent from "../elements/icon";
 
 const PageLayout = ({
   children,

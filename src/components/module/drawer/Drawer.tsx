@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
-import Button from "../button";
+import Button from "../../elements/button";
 
 const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
   const { state: cartState } = useHydrate(

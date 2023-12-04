@@ -1,16 +1,18 @@
 "use client";
 
-import ProductCard from "@/components/product-card";
+import ProductCard from "@/components/elements/product-card";
 import { useProductsStore } from "@/store/useProductsStore";
 
-import DrawerComponent from "@/components/drawer/Drawer";
 import ApiError from "@/components/elements/error/ApiError";
+import LoadingCard from "@/components/elements/product-card/loading-card/loading-card";
+import Search from "@/components/elements/search";
 import Sidebar from "@/components/elements/sidebar";
 import PageLayout from "@/components/layout/PageLayout";
-import LoadingCard from "@/components/product-card/loading-card/loading-card";
+import DrawerComponent from "@/components/module/drawer/Drawer";
 import useLoadMore from "@/hooks/useLoadMore";
 import useToggle from "@/hooks/useToggle";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 
 export default function Home() {
   const { products, loading, error, count, fetchProducts } = useProductsStore(
@@ -29,6 +31,20 @@ export default function Home() {
 
   const { toggleDrawer, isOpen } = useToggle();
 
+  const [searchData, setSearchData] = useState("");
+
+  const router = useRouter();
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchData(e.target.value);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter") {
+      router.push(`/search?product=${searchData}`);
+    }
+  };
+
   if (error) {
     return (
       <div className="my-20">
@@ -41,10 +57,16 @@ export default function Home() {
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
         <h1 className="my-5">Products</h1>
+        <Search
+          handleChange={handleSearch}
+          value={searchData}
+          handleKeyDown={handleKeyDown}
+        />
         <div className="grid grid-cols-5 gap-x-5">
           <div className="col-span-5 mb-10 md:col-span-1">
             <Sidebar />
           </div>
+
           <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
             {loading
               ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
