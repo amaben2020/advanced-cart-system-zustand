@@ -21,6 +21,8 @@ export default function Home() {
 
   console.log(products);
 
+  console.log("URL", process.env.VERCEL_URL);
+
   const SKIP = 8;
   const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);
 
