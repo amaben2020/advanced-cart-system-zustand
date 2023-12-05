@@ -11,36 +11,39 @@ import PageLayout from "@/components/layout/PageLayout";
 import DrawerComponent from "@/components/module/drawer/Drawer";
 import useLoadMore from "@/hooks/useLoadMore";
 import useToggle from "@/hooks/useToggle";
+import { CATEGORY } from "@/utils/data/category";
 import { renderUniqueArrayItems } from "@/utils/renderUniqueItems";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
-
+const SKIP = 8;
 export default function Home() {
+  const { toggleDrawer, isOpen } = useToggle();
+  const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);
+
+  const [searchData, setSearchData] = useState("");
   const { products, loading, error, count, fetchProducts } = useProductsStore(
     (state) => state,
   );
 
-  const productCategories = products.map((product) => {
-    return product.category;
-  });
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const router = useRouter();
+
+  const filterByCategory = (category: string) => {
+    if (selectedCategory.includes(category)) {
+      const updatedCategory = selectedCategory.filter((c) => c !== category);
+      setSelectedCategory(updatedCategory);
+    } else {
+      setSelectedCategory((p) => [...p, category]);
+    }
+  };
 
   const productBrands = products.map((product) => product.brand);
 
-  const SKIP = 8;
-  const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);
-
   useEffect(() => {
     fetchProducts({
-      skip: SKIP,
-      limit: loadMoreLimit,
+      category: selectedCategory,
     });
-  }, [fetchProducts, loadMoreLimit]);
-
-  const { toggleDrawer, isOpen } = useToggle();
-
-  const [searchData, setSearchData] = useState("");
-
-  const router = useRouter();
+  }, [selectedCategory, fetchProducts, loadMoreLimit]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchData(e.target.value);
@@ -51,9 +54,6 @@ export default function Home() {
       router.push(`/search?product=${searchData}`);
     }
   };
-  const filters = ["?category=laptops&"];
-  // const build category query
-  const buildQuery = (query) => {};
 
   if (error) {
     return (
@@ -66,6 +66,7 @@ export default function Home() {
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
       <div>
+        {JSON.stringify(selectedCategory)}
         <h1 className="my-5">Products</h1>
         <Search
           handleChange={handleSearch}
@@ -75,8 +76,10 @@ export default function Home() {
         <div className="grid grid-cols-5 gap-x-5">
           <div className="col-span-5 mb-10 md:col-span-1">
             <Sidebar
-              categories={renderUniqueArrayItems(productCategories)}
+              categories={CATEGORY}
               brands={renderUniqueArrayItems(productBrands)}
+              handleCategoryFilter={filterByCategory}
+              selectedCategory={selectedCategory}
             />
           </div>
 

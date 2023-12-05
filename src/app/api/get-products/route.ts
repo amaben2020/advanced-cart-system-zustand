@@ -19,13 +19,12 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
   if (category?.length) {
     const isMultiple = category.split(",").length > 1;
-
     const filterByCategories = isMultiple ? category.split(",") : category;
 
     query = ProductModel.find({
       category: filterByCategories,
     });
-  } else if (product?.length) {
+  } else if (product?.length && typeof product !== null) {
     query = ProductModel.find({
       title: product,
     });

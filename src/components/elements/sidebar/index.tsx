@@ -1,5 +1,9 @@
-const Sidebar = ({ categories, brands }) => {
-  console.log(brands);
+const Sidebar = ({
+  categories,
+  brands,
+  handleCategoryFilter,
+  selectedCategory,
+}) => {
   return (
     <aside className="p-4 border-2 rounded-md">
       {/* TODO: use a dropdown for this, the dummy api doesnt support this */}
@@ -13,6 +17,8 @@ const Sidebar = ({ categories, brands }) => {
             <>
               <p> {category} </p>
               <input
+                // checked={category === selectedCategory}
+                onChange={() => handleCategoryFilter(category)}
                 type="checkbox"
                 className="w-5 h-5 cursor-pointer accent-green-700"
               />

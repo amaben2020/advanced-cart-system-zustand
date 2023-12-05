@@ -22,7 +22,7 @@ export type TStore = {
   error: boolean;
   count?: number;
 };
-type TOptions = { limit: number; skip: number };
+type TOptions = { limit: number; skip: number; category: string };
 type TActions = {
   fetchProducts: (options: TOptions) => Promise<void>;
 };
@@ -36,10 +36,22 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
   fetchProducts: async (options?: TOptions) => {
     set({ products: [], loading: true, error: false });
     try {
-      let query =
-        options !== undefined
-          ? `${PRODUCT_API}?skip=${options?.skip}&limit=${options?.limit}`
-          : PRODUCT_API;
+      let query = PRODUCT_API;
+
+      if (Array.isArray(options?.category) && options?.category?.length) {
+        const mappedCategories = [options?.category.join(",")];
+        const isMultiple = options?.category.length > 1;
+        const filterByCategories = isMultiple
+          ? mappedCategories
+          : options?.category[0];
+
+        query =
+          options !== undefined
+            ? `${PRODUCT_API}?category=${filterByCategories}`
+            : PRODUCT_API;
+      } else {
+        query = PRODUCT_API;
+      }
 
       const response = await fetch(query);
 
