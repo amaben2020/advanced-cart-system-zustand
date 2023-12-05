@@ -11,6 +11,7 @@ import PageLayout from "@/components/layout/PageLayout";
 import DrawerComponent from "@/components/module/drawer/Drawer";
 import useLoadMore from "@/hooks/useLoadMore";
 import useToggle from "@/hooks/useToggle";
+import { renderUniqueArrayItems } from "@/utils/renderUniqueItems";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 
@@ -19,9 +20,11 @@ export default function Home() {
     (state) => state,
   );
 
-  console.log(products);
+  const productCategories = products.map((product) => {
+    return product.category;
+  });
 
-  console.log("URL", process.env.VERCEL_URL);
+  const productBrands = products.map((product) => product.brand);
 
   const SKIP = 8;
   const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);
@@ -68,7 +71,10 @@ export default function Home() {
         />
         <div className="grid grid-cols-5 gap-x-5">
           <div className="col-span-5 mb-10 md:col-span-1">
-            <Sidebar />
+            <Sidebar
+              categories={renderUniqueArrayItems(productCategories)}
+              brands={renderUniqueArrayItems(productBrands)}
+            />
           </div>
 
           <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
