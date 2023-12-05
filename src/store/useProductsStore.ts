@@ -27,7 +27,7 @@ type TActions = {
   fetchProducts: (options: TOptions) => Promise<void>;
 };
 
-const PRODUCT_API = `${process.env.NEXT_PUBLIC_URL}/api/admin/get-products`;
+const PRODUCT_API = `${process.env.NEXT_PUBLIC_URL}/api/get-products`;
 
 export const useProductsStore = create<TStore & TActions>((set) => ({
   products: [],
