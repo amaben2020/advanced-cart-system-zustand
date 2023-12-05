@@ -12,19 +12,30 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   const searchParams = new URLSearchParams(url.search);
   const category = searchParams.get("category");
   const product = searchParams.get("product");
+  const sortBy = searchParams.get("sortBy");
+  const direction = searchParams.get("direction");
 
   let query: any;
+  let filterByCategories;
 
-  if (category?.length) {
-    const isMultiple = category.split(",").length > 1;
-    const filterByCategories = isMultiple ? category.split(",") : category;
-
+  if (
+    category?.length !== 0 ||
+    (sortBy?.length === 0 && direction?.length === 0)
+  ) {
+    const isMultiple = category?.split(",").length > 1;
+    filterByCategories = isMultiple ? category?.split(",") : category;
     // filtering by category
     query = ProductModel.find({
       category: filterByCategories,
     });
-    // filtering by title i.e search
-  } else if (product?.length && typeof product !== null) {
+  }
+  // else if (category?.length && sortBy && direction) {
+  //   query = ProductModel.find().sort({
+  //     [`${sortBy}`]: direction,
+  //   });
+
+  // filtering by title i.e search
+  else if (product?.length && typeof product !== null) {
     query = ProductModel.find({
       title: product,
     });
@@ -32,9 +43,23 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     query = ProductModel.find();
   }
 
-  // sort logic
+  // sort logic: //title, price
+
+  // if (sortBy && direction) {
+  //   query = ProductModel.find().sort({
+  //     [`${sortBy}`]: direction,
+  //   });
+  // }
 
   // build the model with the query conditionally then finally execute
+  // http://localhost:3000/api/get-products?category=smartphones&sortBy=title&direction=asc
+  if (category?.length && sortBy && direction) {
+    query = ProductModel.find({
+      category: filterByCategories,
+    }).sort({
+      [`${sortBy}`]: direction,
+    });
+  }
 
   try {
     const products: Awaited<TProduct[]> = await query.exec();
