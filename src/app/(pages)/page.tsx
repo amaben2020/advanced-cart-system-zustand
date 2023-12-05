@@ -51,6 +51,9 @@ export default function Home() {
       router.push(`/search?product=${searchData}`);
     }
   };
+  const filters = ["?category=laptops&"];
+  // const build category query
+  const buildQuery = (query) => {};
 
   if (error) {
     return (
