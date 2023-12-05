@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 const Register = () => {
+  const userTypes = ["admin", "user"];
   const handleSubmit = async (formData: FormData) => {
     "use server";
 
@@ -8,6 +9,7 @@ const Register = () => {
     const lastName = formData.get("lastName");
     const firstName = formData.get("firstName");
     const password = formData.get("password");
+    const selectedRole = formData.get("role");
 
     if (email && password) {
       const response = await fetch(
@@ -19,16 +21,14 @@ const Register = () => {
             password,
             firstName,
             lastName,
+            role: selectedRole,
           }),
         },
       );
 
       const data = await response.json();
 
-      if (
-        data.status === 200 &&
-        data.statusText === "User registration successful"
-      ) {
+      if (data?.user?.firstName.length > 0 && data?.user?.email.length > 0) {
         redirect("/auth/login");
       }
     }
@@ -67,7 +67,27 @@ const Register = () => {
           placeholder="Password"
         />
 
-        <button type="submit">Register</button>
+        <div className="flex gap-x-5">
+          {userTypes.map((type) => (
+            <>
+              <label htmlFor="">{type}</label>
+              <input
+                className="p-3 my-4 text-black border-2 rounded-md"
+                type="radio"
+                name="role" // Ensure they have the same name
+                id={type}
+                value={type}
+              />
+            </>
+          ))}
+        </div>
+
+        <button
+          type="submit"
+          className="py-2 px-10 border max-w-[150px] mx-auto"
+        >
+          Register
+        </button>
       </form>
     </div>
   );

@@ -36,7 +36,9 @@ export const POST = async (req: NextRequest) => {
       password: hash,
       lastName: request.lastName,
       email: request.email,
+      role: request.role,
     });
+    console.log(userInfo);
 
     if (userInfo?._id) {
       return Response.json(
@@ -44,7 +46,7 @@ export const POST = async (req: NextRequest) => {
           user: userInfo,
         },
         {
-          status: 200,
+          status: 201,
           statusText: "User registration successful",
         },
       );

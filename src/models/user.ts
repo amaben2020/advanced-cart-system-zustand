@@ -18,6 +18,13 @@ const userSchema = new Schema({
     type: String,
     unique: true,
   },
+
+  role: {
+    required: true,
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
 });
 
 // https://stackoverflow.com/questions/19051041/cannot-overwrite-model-once-compiled-mongoose#:~:text=The%20error%20is%20occurring%20because,it%20when%20it%20needs%20it.
