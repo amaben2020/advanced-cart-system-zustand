@@ -22,13 +22,11 @@ export type TStore = {
   error: boolean;
   count?: number;
 };
-type TOptions = { limit: number; skip: number; category: string };
+type TOptions = { limit?: number; skip?: number; category: string[] };
 type TActions = {
   fetchProducts: (options: TOptions) => Promise<void>;
 };
-
 const PRODUCT_API = `${process.env.NEXT_PUBLIC_URL}/api/get-products`;
-
 export const useProductsStore = create<TStore & TActions>((set) => ({
   products: [],
   loading: false,
@@ -36,14 +34,14 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
   fetchProducts: async (options?: TOptions) => {
     set({ products: [], loading: true, error: false });
     try {
-      let query = PRODUCT_API;
-
+      let query;
       if (Array.isArray(options?.category) && options?.category?.length) {
+        const singleCategory = options?.category[0];
         const mappedCategories = [options?.category.join(",")];
         const isMultiple = options?.category.length > 1;
         const filterByCategories = isMultiple
           ? mappedCategories
-          : options?.category[0];
+          : singleCategory;
 
         query =
           options !== undefined

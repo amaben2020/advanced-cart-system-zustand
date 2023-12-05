@@ -7,13 +7,11 @@ import { ErrorHandler } from "../helpers/error-handler";
 export const GET = async (req: NextRequest, res: NextResponse) => {
   await dbConnect();
 
-  // filtration
+  // filtration and search logic
   const url = new URL(req.url);
   const searchParams = new URLSearchParams(url.search);
   const category = searchParams.get("category");
   const product = searchParams.get("product");
-  console.log(product);
-  console.log(category);
 
   let query: any;
 
@@ -21,9 +19,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const isMultiple = category.split(",").length > 1;
     const filterByCategories = isMultiple ? category.split(",") : category;
 
+    // filtering by category
     query = ProductModel.find({
       category: filterByCategories,
     });
+    // filtering by title i.e search
   } else if (product?.length && typeof product !== null) {
     query = ProductModel.find({
       title: product,
@@ -32,9 +32,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     query = ProductModel.find();
   }
 
-  // sort
-  // filter
-  // search
+  // sort logic
 
   // build the model with the query conditionally then finally execute
 

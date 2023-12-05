@@ -1,9 +1,6 @@
 "use client";
-
-import ProductCard from "@/components/elements/product-card";
-import { useProductsStore } from "@/store/useProductsStore";
-
 import ApiError from "@/components/elements/error/ApiError";
+import ProductCard from "@/components/elements/product-card";
 import LoadingCard from "@/components/elements/product-card/loading-card/loading-card";
 import Search from "@/components/elements/search";
 import Sidebar from "@/components/elements/sidebar";
@@ -11,6 +8,7 @@ import PageLayout from "@/components/layout/PageLayout";
 import DrawerComponent from "@/components/module/drawer/Drawer";
 import useLoadMore from "@/hooks/useLoadMore";
 import useToggle from "@/hooks/useToggle";
+import { useProductsStore } from "@/store/useProductsStore";
 import { CATEGORY } from "@/utils/data/category";
 import { renderUniqueArrayItems } from "@/utils/renderUniqueItems";
 import { useRouter } from "next/navigation";
@@ -92,7 +90,8 @@ export default function Home() {
                   <ProductCard key={product.id} product={product} />
                 ))}
 
-            <div className="flex justify-center mx-auto my-10 text-center">
+            {/* TODO: Refactor with mongoose */}
+            {/* <div className="flex justify-center mx-auto my-10 text-center">
               <button
                 className="flex items-center gap-2 p-4 text-xl text-center text-white bg-green-700 rounded-lg hover:bg-green-800 disabled:bg-gray-700 disabled:cursor-not-allowed"
                 onClick={incrementLoadMore}
@@ -114,7 +113,7 @@ export default function Home() {
                   />
                 </svg>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
         <DrawerComponent toggleDrawer={toggleDrawer} isOpen={isOpen} />
