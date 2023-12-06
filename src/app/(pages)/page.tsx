@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 const SKIP = 8;
 export default function Home() {
+  const router = useRouter();
   const { toggleDrawer, isOpen } = useToggle();
   const { incrementLoadMore, loadMoreLimit, loadMore } = useLoadMore(SKIP);
 
@@ -33,8 +34,6 @@ export default function Home() {
   const handleSortBy = (e: ChangeEvent<HTMLSelectElement>) =>
     setSortBy(e.target.value as "title" | "price");
 
-  const router = useRouter();
-
   const filterByCategory = (category: string) => {
     if (selectedCategory.includes(category)) {
       const updatedCategory = selectedCategory.filter((c) => c !== category);
@@ -43,6 +42,8 @@ export default function Home() {
       setSelectedCategory((p) => [...p, category]);
     }
   };
+
+  const clearCateoryFilters = () => setSelectedCategory([]);
 
   const productBrands = products.map((product) => product.brand);
 
@@ -84,8 +85,8 @@ export default function Home() {
             value={searchData}
             handleKeyDown={handleKeyDown}
           />
-          <div className="fixed top-[30%] w-[250px]">
-            <div className="w-full col-span-5 mb-10 md:col-span-1">
+          <div>
+            <div className="col-span-5 mb-10 md:col-span-1">
               <Sidebar
                 categories={CATEGORY}
                 brands={renderUniqueArrayItems(productBrands)}
@@ -93,6 +94,7 @@ export default function Home() {
                 selectedCategory={selectedCategory}
                 handleSortDirection={handleSortDirection}
                 handleSortBy={handleSortBy}
+                clearFilters={clearCateoryFilters}
               />
             </div>
           </div>

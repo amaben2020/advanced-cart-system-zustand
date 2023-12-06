@@ -7,10 +7,10 @@ const Sidebar = ({
   selectedCategory,
   handleSortDirection,
   handleSortBy,
+  clearFilters,
 }: any) => {
   return (
     <aside className="p-3 border-2 rounded-md min-h-[50vh]">
-      {/* TODO: use a dropdown for this, the dummy api doesnt support this */}
       <p>
         {" "}
         Filters{selectedCategory.length > 0 && ":"}{" "}
@@ -52,6 +52,8 @@ const Sidebar = ({
         title="By Category"
         handleCategoryFilter={handleCategoryFilter}
         items={categories}
+        clearFilters={clearFilters}
+        selectedCategory={selectedCategory}
       />
     </aside>
   );

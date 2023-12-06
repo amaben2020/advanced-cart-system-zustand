@@ -46,7 +46,7 @@ const SearchResults = () => {
                   <LoadingCard key={i} />
                 ))
               : state.data?.products?.map((product: TProduct) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard key={product._id} product={product} />
                 ))}
           </div>
         </div>

@@ -15,7 +15,6 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
     (state: TStore) => state,
   );
 
-  console.log(cartState);
   const [qty, setQty] = useState<number>(0);
 
   const isTablet = useMatchMedia(900);
