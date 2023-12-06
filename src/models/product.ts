@@ -1,5 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 
+export type MongooseSchemaKeys = "title" | "price";
+
 const productSchema = new Schema({
   brand: {
     required: true,

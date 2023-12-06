@@ -1,23 +1,12 @@
-import ProductModel from "@/models/product";
+import ProductModel, { MongooseSchemaKeys } from "@/models/product";
 import dbConnect from "@/services/mongod-db";
 import { TProduct } from "@/store/useProductsStore";
+import { SortOrder } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 import { ErrorHandler } from "../helpers/error-handler";
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
   await dbConnect();
-
-  // sort logic: //title, price
-
-  // build the model with the query conditionally then finally execute
-  // http://localhost:3000/api/get-products?category=smartphones&sortBy=title&direction=asc
-  // if (category?.length && sortBy?.length && direction?.length) {
-  //   query = ProductModel.find({
-  //     category: filterByCategories,
-  //   }).sort({
-  //     sortBy: direction?.toLowerCase(),
-  //   });
-  // }
 
   try {
     // filtration and search logic
@@ -25,8 +14,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const searchParams = new URLSearchParams(url.search);
     const category = searchParams.get("category");
     const product = searchParams.get("product");
-    const sortBy = searchParams.get("sortBy");
-    const direction = searchParams.get("direction");
+    const sortBy = searchParams.get("sortBy") as MongooseSchemaKeys;
+    const direction = searchParams.get("direction") satisfies
+      | SortOrder
+      | null
+      | string;
 
     const hasCategoryWithoutSort = Boolean(
       category?.length && !sortBy?.length && !direction?.length,
@@ -51,6 +43,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         [`${sortBy}`]: direction?.toLowerCase(),
       });
     }
+
     // filtering by title i.e search
     else if (product?.length) {
       query = ProductModel.find({
