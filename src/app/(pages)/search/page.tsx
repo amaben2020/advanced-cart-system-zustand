@@ -15,7 +15,7 @@ const SearchResults = () => {
   const searchedItem = location?.get(SEARCH_QUERY)?.split(" ").join("+");
 
   const { state } = useDataFetch(`?product=${searchedItem}`);
-  console.log(state.data.products.products);
+
   return (
     <PageLayout>
       <div className="flex justify-between gap-x-6">

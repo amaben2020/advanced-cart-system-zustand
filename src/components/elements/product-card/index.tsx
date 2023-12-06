@@ -36,7 +36,9 @@ const ProductCard = ({ product }: { product: TProduct }) => {
         />
       </div>
 
-      <h3 className="font-bold capitalize h-[60px]">{product.title}</h3>
+      <h3 className="font-bold capitalize h-[60px]">
+        {truncate(product.title, 32)}
+      </h3>
 
       <p className="h-[60px]"> {truncate(product.description, 46)}</p>
 

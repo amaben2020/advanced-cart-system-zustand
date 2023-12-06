@@ -77,7 +77,7 @@ const FilterDropdown = ({
 
           <button
             onClick={clearFilters}
-            className="flex items-center justify-between w-full p-3 text-center text-white bg-green-700 border"
+            className="flex items-center justify-between w-full p-3 text-center text-white bg-green-700 border rounded-lg"
           >
             Clear Filters{" "}
             <svg

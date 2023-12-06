@@ -78,7 +78,7 @@ export default function Home() {
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
       <div className="grid grid-cols-5 gap-x-5">
-        <div className="hidden md:block md:col-span-1">
+        <div className="hidden lg:block lg:col-span-2 xl:col-span-1">
           <h1 className="my-5">Products</h1>
           <Search
             handleChange={handleSearch}
@@ -100,7 +100,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="col-span-5 md:col-span-4">
+        <div className="col-span-5 lg:col-span-3 xl:col-span-4">
           <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
             <div className="grid grid-cols-1 col-span-5 gap-3 md:gap-6 md:col-span-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
               {loading
