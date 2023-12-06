@@ -35,7 +35,7 @@ const PageLayout = ({
           <button className="relative ml-auto" onClick={toggleDrawer}>
             <IconComponent name="cart" className="p-2" />
             {cartState?.length > 0 && (
-              <div className="absolute w-6 h-6 bg-red-500 rounded-full -top-3 -right-3">
+              <div className="absolute w-6 h-6 text-white bg-green-700 rounded-full -top-3 -right-3">
                 <p> {Number(cartState?.length)}</p>
               </div>
             )}
