@@ -1,0 +1,6 @@
+FUZZY SEARCH
+
+Learned an important concept today. This relies on regex to search for text that closely matches a term even if misspelled
+
+https://stackoverflow.com/questions/38421664/fuzzy-searching-with-mongodb
+// mongoose-fuzzy-searching

@@ -11,7 +11,7 @@ const PageLayout = ({
   toggleDrawer,
 }: {
   children: ReactNode;
-  toggleDrawer: () => void;
+  toggleDrawer?: () => void;
 }) => {
   const { state: cartState } = useHydrate(
     useCartStore,

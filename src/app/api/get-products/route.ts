@@ -5,6 +5,10 @@ import { SortOrder } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 import { ErrorHandler } from "../helpers/error-handler";
 
+function escapeRegex(text: string) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
 export const GET = async (req: NextRequest, res: NextResponse) => {
   await dbConnect();
 
@@ -50,8 +54,10 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
     // filtering by title i.e search
     else if (product?.length) {
+      const regex = new RegExp(escapeRegex(product!), "gi");
+
       query = ProductModel.find({
-        title: product,
+        title: regex,
       });
     } else {
       query = ProductModel.find();

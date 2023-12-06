@@ -11,6 +11,7 @@ import useToggle from "@/hooks/useToggle";
 import { useProductsStore } from "@/store/useProductsStore";
 import { CATEGORY } from "@/utils/data/category";
 import { renderUniqueArrayItems } from "@/utils/renderUniqueItems";
+import { SortOrder } from "mongoose";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 const SKIP = 8;
@@ -24,13 +25,13 @@ export default function Home() {
   );
 
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  const [sortDirection, setSortDirection] = useState<string>("asc");
-  const [sortBy, setSortBy] = useState<string>("title");
+  const [sortDirection, setSortDirection] = useState<SortOrder>("asc");
+  const [sortBy, setSortBy] = useState<"title" | "price">("title");
 
   const handleSortDirection = (e: ChangeEvent<HTMLSelectElement>) =>
-    setSortDirection(e.target.value);
+    setSortDirection(e.target.value as SortOrder);
   const handleSortBy = (e: ChangeEvent<HTMLSelectElement>) =>
-    setSortBy(e.target.value);
+    setSortBy(e.target.value as "title" | "price");
 
   const router = useRouter();
 
@@ -108,32 +109,34 @@ export default function Home() {
                     <ProductCard key={product.id} product={product} />
                   ))}
             </div>
-            <div className="col-span-5 place-self-center">
-              {loadMoreLimit >= count! ? (
-                <p>You&apos;ve reached the end</p>
-              ) : (
-                <button
-                  className="flex items-center gap-2 p-4 text-xl text-center text-white bg-green-700 rounded-full hover:bg-green-800 disabled:bg-gray-700 disabled:cursor-not-allowed"
-                  onClick={incrementLoadMore}
-                  disabled={loadMoreLimit >= count!}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6 text-white"
+            {!loading && (
+              <div className="col-span-5 place-self-center">
+                {loadMoreLimit >= count! ? (
+                  <p>You&apos;ve reached the end</p>
+                ) : (
+                  <button
+                    className="flex items-center gap-2 p-4 text-xl text-center text-white bg-green-700 rounded-full hover:bg-green-800 disabled:bg-gray-700 disabled:cursor-not-allowed"
+                    onClick={incrementLoadMore}
+                    disabled={loadMoreLimit >= count!}
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                    />
-                  </svg>
-                </button>
-              )}
-            </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 text-white"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                      />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
         <DrawerComponent toggleDrawer={toggleDrawer} isOpen={isOpen} />
