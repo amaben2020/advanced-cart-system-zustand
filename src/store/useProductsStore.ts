@@ -55,7 +55,6 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
 
       const data = await response.json();
 
-      // we need this to disable the loadmore button
       const totalProducts = await fetch(PRODUCT_API);
       const info = await totalProducts.json();
 
@@ -67,7 +66,7 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
       });
     } catch (error: any) {
       if (error instanceof Error) {
-        // getting access to current state of things if needed
+        // getting access to current state of things if needed, state would point to previous state
         set((state) => ({
           products: [],
           loading: false,

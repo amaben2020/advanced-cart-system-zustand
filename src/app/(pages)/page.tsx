@@ -16,7 +16,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 const SKIP = 8;
 export default function Home() {
   const { toggleDrawer, isOpen } = useToggle();
-  const { incrementLoadMore, loadMoreLimit } = useLoadMore(SKIP);
+  const { incrementLoadMore, loadMoreLimit, loadMore } = useLoadMore(SKIP);
 
   const [searchData, setSearchData] = useState("");
   const { products, loading, error, count, fetchProducts } = useProductsStore(
@@ -82,43 +82,45 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
-            {loading
-              ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
-                  <LoadingCard key={i} />
-                ))
-              : products?.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-
-            {/* TODO: Refactor with mongoose */}
-            {/* <div className="flex justify-center mx-auto my-10 text-center">
-              <button
-                className="flex items-center gap-2 p-4 text-xl text-center text-white bg-green-700 rounded-lg hover:bg-green-800 disabled:bg-gray-700 disabled:cursor-not-allowed"
-                onClick={incrementLoadMore}
-                disabled={loadMoreLimit >= count!}
-              >
-                Load More
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 text-white"
+            <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 md:gap-6">
+              {loading
+                ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
+                    <LoadingCard key={i} />
+                  ))
+                : loadMore(products, loadMoreLimit)?.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+            </div>
+            <div className="col-span-5 place-self-center">
+              {loadMoreLimit >= count! ? (
+                <p>You&apos;ve reached the end</p>
+              ) : (
+                <button
+                  className="flex items-center gap-2 p-4 text-xl text-center text-white bg-green-700 rounded-full hover:bg-green-800 disabled:bg-gray-700 disabled:cursor-not-allowed"
+                  onClick={incrementLoadMore}
+                  disabled={loadMoreLimit >= count!}
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                  />
-                </svg>
-              </button>
-            </div> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <DrawerComponent toggleDrawer={toggleDrawer} isOpen={isOpen} />
       </div>
-      {/* <button>Load More Button Here</button> */}
     </PageLayout>
   );
 }

@@ -12,7 +12,10 @@ const ProductCard = ({ product }: { product: TProduct }) => {
   )?.quantity;
 
   return (
-    <div className="relative flex flex-col gap-4 card">
+    <div className="relative flex flex-col gap-2 card">
+      <div className="absolute z-20 px-2 py-1 text-white bg-green-700 rounded-xl -left-1 -top-5">
+        {product?.category}
+      </div>
       {Number(currentProductQty) > 0 && (
         <>
           <span className="absolute inline-flex w-6 h-6 text-black bg-green-700 rounded-full opacity-75 animate-ping -top-2 -right-3"></span>
@@ -22,6 +25,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
           </p>
         </>
       )}
+
       <div className="relative h-[200px]">
         <Image
           src={product.images[0]}

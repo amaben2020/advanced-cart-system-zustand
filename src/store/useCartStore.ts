@@ -24,8 +24,7 @@ export const useCartStore = create(
       totalPrice: 0,
       totalAmount: 0,
       addToCart: (product: TProduct) => {
-        //@ts-ignore
-        set((state) => {
+        set((state: any) => {
           const productInCart = state.cart.findIndex(
             (elem: TProduct) => elem?.id === product.id,
           );
@@ -77,9 +76,7 @@ export const useCartStore = create(
 
           if (itemToUpdate) {
             itemToUpdate.quantity = quantity;
-            // itemToUpdate.price = itemToUpdate.price * quantity;
 
-            console.log("cartState in update", cartState);
             set({
               cart: immutableState,
               totalAmount: cartState?.totalAmount + 1,

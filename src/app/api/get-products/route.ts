@@ -15,10 +15,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const category = searchParams.get("category");
     const product = searchParams.get("product");
     const sortBy = searchParams.get("sortBy") as MongooseSchemaKeys;
-    const direction = searchParams.get("direction") satisfies
-      | SortOrder
-      | null
-      | string;
+    const direction = searchParams.get("direction") as SortOrder | null | any;
 
     const hasCategoryWithoutSort = Boolean(
       category?.length && !sortBy?.length && !direction?.length,
@@ -64,8 +61,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
       },
     );
   } catch (error) {
-    console.log("ERROR", error);
-
     if (error instanceof Error) {
       if (String(error).includes("TypeError")) {
         return NextResponse.json(
