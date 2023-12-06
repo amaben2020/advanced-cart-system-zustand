@@ -24,6 +24,9 @@ export default function Home() {
   );
 
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [sortBy, setSortBy] = useState<"title" | "price">("title");
+
   const router = useRouter();
 
   const filterByCategory = (category: string) => {
@@ -63,24 +66,27 @@ export default function Home() {
 
   return (
     <PageLayout toggleDrawer={toggleDrawer}>
-      <div>
-        {JSON.stringify(selectedCategory)}
-        <h1 className="my-5">Products</h1>
-        <Search
-          handleChange={handleSearch}
-          value={searchData}
-          handleKeyDown={handleKeyDown}
-        />
-        <div className="grid grid-cols-5 gap-x-5">
-          <div className="col-span-5 mb-10 md:col-span-1">
-            <Sidebar
-              categories={CATEGORY}
-              brands={renderUniqueArrayItems(productBrands)}
-              handleCategoryFilter={filterByCategory}
-              selectedCategory={selectedCategory}
-            />
+      <div className="grid grid-cols-5 gap-x-5">
+        <div className="col-span-1">
+          <h1 className="my-5">Products</h1>
+          <Search
+            handleChange={handleSearch}
+            value={searchData}
+            handleKeyDown={handleKeyDown}
+          />
+          <div className="fixed top-[30%] w-[250px]">
+            <div className="w-full col-span-5 mb-10 md:col-span-1">
+              <Sidebar
+                categories={CATEGORY}
+                brands={renderUniqueArrayItems(productBrands)}
+                handleCategoryFilter={filterByCategory}
+                selectedCategory={selectedCategory}
+              />
+            </div>
           </div>
+        </div>
 
+        <div className="col-span-4">
           <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
             <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 md:gap-6">
               {loading

@@ -15,7 +15,8 @@ const Search = ({
       onChange={handleChange}
       type="search"
       onKeyDown={handleKeyDown}
-      className="w-[250px] p-2 border rounded-md mb-4"
+      className="w-[250px] p-2 mb-4 border-2 rounded-md placeholder:italic"
+      placeholder="Search for products..."
     />
   );
 };

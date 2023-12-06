@@ -1,6 +1,7 @@
 //@ts-nocheck
 import useHydrate from "@/hooks/useHydrate";
 import { TState, useCartStore } from "@/store/useCartStore";
+import { uppercaseText } from "@/utils/uppercaseText";
 import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
 import IconComponent from "../elements/icon";
@@ -25,7 +26,9 @@ const PageLayout = ({
         <nav className="flex px-2 py-4">
           <div>
             {session.data && (
-              <p>Welcome, {session?.data?.user?.user?.firstName}</p>
+              <p>
+                Welcome, {uppercaseText(session?.data?.user?.user?.firstName)}
+              </p>
             )}
           </div>
 
