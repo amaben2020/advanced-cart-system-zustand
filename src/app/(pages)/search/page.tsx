@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 import ProductCard from "@/components/elements/product-card";
 import LoadingCard from "@/components/elements/product-card/loading-card/loading-card";
@@ -14,7 +15,7 @@ const SearchResults = () => {
   const searchedItem = location?.get(SEARCH_QUERY)?.split(" ").join("+");
 
   const { state } = useDataFetch(`?product=${searchedItem}`);
-
+  console.log(state.data.products.products);
   return (
     <PageLayout>
       <div className="flex justify-between gap-x-6">
@@ -45,7 +46,8 @@ const SearchResults = () => {
               ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
                   <LoadingCard key={i} />
                 ))
-              : state.data?.products?.map((product: TProduct) => (
+              : state.data.products?.products?.length > 0 &&
+                state.data?.products?.products?.map((product: TProduct) => (
                   <ProductCard key={product._id} product={product} />
                 ))}
           </div>

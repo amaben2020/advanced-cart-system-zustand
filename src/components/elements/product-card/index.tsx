@@ -28,7 +28,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
 
       <div className="relative h-[200px]">
         <Image
-          src={product.images[0]}
+          src={product?.images[0]}
           alt=""
           fill
           className="absolute top-0 w-full rounded-md"
