@@ -36,16 +36,16 @@ const ProductCard = ({ product }: { product: TProduct }) => {
         />
       </div>
 
-      <h3 className="font-bold capitalize">{product.title}</h3>
+      <h3 className="font-bold capitalize h-[60px]">{product.title}</h3>
 
-      <p>{truncate(product.description, 45)}</p>
+      <p className="h-[60px]"> {truncate(product.description, 46)}</p>
 
-      {/* TODO: use stars here */}
+      {/* TODO: use stars here for rating*/}
       <p>{product.rating}</p>
       <p className="font-bold">₦{product.price.toFixed(2)}</p>
 
       <button
-        className="w-full p-3 mt-6 font-bold text-white bg-green-700 rounded-md"
+        className="w-full p-3 font-bold text-white bg-green-700 rounded-md"
         onClick={() => cart.addToCart(product)}
       >
         Add to cart

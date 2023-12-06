@@ -100,7 +100,7 @@ export default function Home() {
 
         <div className="col-span-4">
           <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
-            <div className="grid grid-cols-1 col-span-5 gap-3 md:col-span-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 md:gap-6">
+            <div className="grid grid-cols-1 col-span-5 gap-3 md:gap-6 md:col-span-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
               {loading
                 ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
                     <LoadingCard key={i} />
