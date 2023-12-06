@@ -5,6 +5,8 @@ const Sidebar = ({
   brands,
   handleCategoryFilter,
   selectedCategory,
+  handleSortDirection,
+  handleSortBy,
 }: any) => {
   return (
     <aside className="p-3 border-2 rounded-md min-h-[50vh]">
@@ -21,17 +23,27 @@ const Sidebar = ({
       <div className="flex justify-between my-4 gap-x-3">
         <div>
           <label htmlFor=""> Sort By: </label>
-          <select name="" id="" className="w-full p-3 border-2 rounded-lg">
-            <option value="">Title</option>
-            <option value="">Price</option>
+          <select
+            name=""
+            id=""
+            className="w-full p-3 border-2 rounded-lg"
+            onChange={handleSortBy}
+          >
+            <option value="title">Title</option>
+            <option value="price">Price</option>
           </select>
         </div>
 
         <div>
           <label htmlFor=""> Sort Direction: </label>
-          <select name="" id="" className="w-full p-3 border-2 rounded-lg">
-            <option value="">Asc</option>
-            <option value="">Desc</option>
+          <select
+            name=""
+            id=""
+            className="w-full p-3 border-2 rounded-lg"
+            onChange={handleSortDirection}
+          >
+            <option value="asc">Asc</option>
+            <option value="desc">Desc</option>
           </select>
         </div>
       </div>

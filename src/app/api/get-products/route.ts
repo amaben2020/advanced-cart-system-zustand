@@ -20,6 +20,9 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const hasCategoryWithoutSort = Boolean(
       category?.length && !sortBy?.length && !direction?.length,
     );
+    const hasSortWithoutCategory = Boolean(
+      !category?.length && sortBy?.length && direction?.length,
+    );
     const hasCategoryWithSort = Boolean(
       category?.length && sortBy?.length && direction?.length,
     );
@@ -37,6 +40,10 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
       query = ProductModel.find({
         category: filterByCategories,
       }).sort({
+        [`${sortBy}`]: direction?.toLowerCase(),
+      });
+    } else if (hasSortWithoutCategory) {
+      query = ProductModel.find().sort({
         [`${sortBy}`]: direction?.toLowerCase(),
       });
     }

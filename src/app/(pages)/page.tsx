@@ -24,8 +24,13 @@ export default function Home() {
   );
 
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-  const [sortBy, setSortBy] = useState<"title" | "price">("title");
+  const [sortDirection, setSortDirection] = useState<string>("asc");
+  const [sortBy, setSortBy] = useState<string>("title");
+
+  const handleSortDirection = (e: ChangeEvent<HTMLSelectElement>) =>
+    setSortDirection(e.target.value);
+  const handleSortBy = (e: ChangeEvent<HTMLSelectElement>) =>
+    setSortBy(e.target.value);
 
   const router = useRouter();
 
@@ -43,8 +48,12 @@ export default function Home() {
   useEffect(() => {
     fetchProducts({
       category: selectedCategory,
+      sort: {
+        sortBy,
+        direction: sortDirection,
+      },
     });
-  }, [selectedCategory, fetchProducts, loadMoreLimit]);
+  }, [selectedCategory, fetchProducts, loadMoreLimit, sortBy, sortDirection]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchData(e.target.value);
@@ -81,6 +90,8 @@ export default function Home() {
                 brands={renderUniqueArrayItems(productBrands)}
                 handleCategoryFilter={filterByCategory}
                 selectedCategory={selectedCategory}
+                handleSortDirection={handleSortDirection}
+                handleSortBy={handleSortBy}
               />
             </div>
           </div>

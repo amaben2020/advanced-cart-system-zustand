@@ -1,3 +1,4 @@
+import { SortOrder } from "mongoose";
 import { create } from "zustand";
 
 // Zustand pattern for state and actions
@@ -22,7 +23,10 @@ export type TStore = {
   error: boolean;
   count?: number;
 };
-type TOptions = { limit?: number; skip?: number; category: string[] };
+type TOptions = {
+  sort: { sortBy: "title" | "price"; direction: SortOrder };
+  category: string[];
+};
 type TActions = {
   fetchProducts: (options: TOptions) => Promise<void>;
 };
@@ -45,12 +49,12 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
 
         query =
           options !== undefined
-            ? `${PRODUCT_API}?category=${filterByCategories}`
+            ? `${PRODUCT_API}?category=${filterByCategories}&sortBy=${options.sort.sortBy}&direction=${options.sort.direction}`
             : PRODUCT_API;
       } else {
-        query = PRODUCT_API;
+        query = `${PRODUCT_API}?sortBy=${options?.sort?.sortBy}&direction=${options?.sort?.direction}`;
       }
-
+      console.log(query);
       const response = await fetch(query);
 
       const data = await response.json();
