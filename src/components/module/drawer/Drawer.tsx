@@ -21,7 +21,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
   const isTablet = useMatchMedia(900);
 
   const sumGrandTotal = cartState?.cart?.reduce((acc: any, cv: any) => {
-    acc += cv.quantity * cv.price;
+    acc += cv?.quantity * cv?.price;
 
     return acc;
   }, 0);
@@ -57,7 +57,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
             cartState?.cart?.map((cartItem: TProduct) => {
               return (
                 <div
-                  key={cartItem?.id}
+                  key={cartItem?._id}
                   className="flex items-center gap-6 py-4 my-3 border"
                 >
                   <Image
@@ -77,7 +77,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                   </div>
 
                   <div>
-                    Sub Total: {Number(cartItem?.price * cartItem.quantity)}
+                    Sub Total: {Number(cartItem?.price * cartItem?.quantity)}
                   </div>
 
                   <div>
@@ -98,7 +98,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                     <button
                       className="p-2 border border-green-700 rounded-lg"
                       onClick={() => {
-                        cartState.updateCartQuantity(cartItem?.id, qty);
+                        cartState.updateCartQuantity(cartItem?._id, qty);
                       }}
                     >
                       Update

@@ -4,7 +4,7 @@ import { create } from "zustand";
 // Zustand pattern for state and actions
 
 export type TProduct = {
-  id: number;
+  _id: number;
   title: string;
   description: string;
   price: number;
@@ -54,7 +54,6 @@ export const useProductsStore = create<TStore & TActions>((set) => ({
       } else {
         query = `${PRODUCT_API}?sortBy=${options?.sort?.sortBy}&direction=${options?.sort?.direction}`;
       }
-      console.log(query);
       const response = await fetch(query);
 
       const data = await response.json();

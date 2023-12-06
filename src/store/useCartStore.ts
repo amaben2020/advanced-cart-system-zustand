@@ -26,15 +26,15 @@ export const useCartStore = create(
       addToCart: (product: TProduct) => {
         set((state: any) => {
           const productInCart = state.cart.findIndex(
-            (elem: TProduct) => elem?.id === product.id,
+            (elem: TProduct) => elem?._id === product._id,
           );
           product["quantity"] = 1;
           if (
             productInCart > -1 &&
-            state.cart.find((elem: TProduct) => elem?.id === product.id)
+            state.cart.find((elem: TProduct) => elem?._id === product._id)
           ) {
             const updatedCart = state.cart.map((elem: TProduct) => {
-              if (elem?.id === product.id) {
+              if (elem?._id === product._id) {
                 return {
                   ...elem,
                   quantity: elem?.quantity + 1,
@@ -58,7 +58,7 @@ export const useCartStore = create(
 
       removeFromCart: (product: TProduct) => {
         set((state: Pick<TState, "cart" | "totalAmount" | "totalPrice">) => ({
-          cart: state.cart.filter((elem) => elem?.id !== product?.id),
+          cart: state.cart.filter((elem) => elem?._id !== product?._id),
           totalAmount: 0,
           totalPrice: 0,
         }));
@@ -71,7 +71,7 @@ export const useCartStore = create(
 
         if (cartState.length > 0) {
           let itemToUpdate: any = immutableState.find(
-            (elem) => elem?.id === id,
+            (elem) => elem?._id === id,
           );
 
           if (itemToUpdate) {
