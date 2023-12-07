@@ -41,16 +41,16 @@ const Login = () => {
     }
   };
   return (
-    <div className="p-20">
-      <h3 className="mb-4"> Login </h3>
-
+    <div className="max-w-full md:max-w-[900px] mx-auto justify-center p-3 md:p-20">
       <form onSubmit={handleSubmit} className="flex flex-col p-20 border">
+        <h3 className="mb-4"> Login </h3>
         <input
           onChange={handleChange}
           className="p-3 my-4 text-black border-2 rounded-md"
           type="email"
           name="email"
           value={userInfo?.email}
+          placeholder="Email"
         />
 
         <div className="relative">
@@ -60,6 +60,7 @@ const Login = () => {
             type={showPassword ? "password" : "text"}
             name="password"
             value={userInfo?.password}
+            placeholder="Password"
           />
           <span
             className="absolute z-10 cursor-pointer top-[40%] right-4"

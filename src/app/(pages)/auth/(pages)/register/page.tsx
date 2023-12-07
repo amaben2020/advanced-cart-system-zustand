@@ -28,15 +28,22 @@ const Register = () => {
 
       const data = await response.json();
 
+      if (data?.message.includes("already")) {
+        console.log(data?.message);
+      }
+
       if (data?.user?.firstName.length > 0 && data?.user?.email.length > 0) {
         redirect("/auth/login");
       }
     }
   };
   return (
-    <div>
-      Register {process?.env?.VERCEL}
-      <form action={handleSubmit} className="flex flex-col p-20 border">
+    <div className="max-w-full md:max-w-[900px] mx-auto justify-center p-3 md:p-20">
+      <form
+        action={handleSubmit}
+        className="flex flex-col py-2 md:py-5 px-5 md:px-10 border gap-y-3"
+      >
+        <h1 className="text-center">Register</h1>
         <input
           className="p-3 my-4 text-black border-2 rounded-md"
           type="text"
@@ -67,24 +74,26 @@ const Register = () => {
           placeholder="Password"
         />
 
-        <div className="flex gap-x-5">
+        <div className="flex justify-between items-center gap-x-3">
           {userTypes.map((type) => (
-            <>
-              <label htmlFor="">{type}</label>
+            <div key={type}>
+              <label htmlFor="" className="mr-2">
+                {type}
+              </label>
               <input
-                className="p-3 my-4 text-black border-2 rounded-md"
+                className="p-3 text-black border-2 rounded-md"
                 type="radio"
                 name="role" // Ensure they have the same name
                 id={type}
                 value={type}
               />
-            </>
+            </div>
           ))}
         </div>
 
         <button
           type="submit"
-          className="py-2 px-10 border max-w-[150px] mx-auto"
+          className="py-2 px-10 border-2 rounded-lg max-w-[150px] mx-auto"
         >
           Register
         </button>
