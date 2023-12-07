@@ -1,9 +1,8 @@
 //@ts-nocheck
 import useHydrate from "@/hooks/useHydrate";
 import { TState, useCartStore } from "@/store/useCartStore";
-import { uppercaseText } from "@/utils/uppercaseText";
 import { useSession } from "next-auth/react";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import IconComponent from "../elements/icon";
 
 const PageLayout = ({
@@ -20,26 +19,35 @@ const PageLayout = ({
 
   const session = useSession();
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <main className="p-6 lg:p-10 xl:p-10 2xl:p-20">
       <header>
-        <nav className="flex px-2 py-4">
-          <div>
+        <nav className="flex px-2 pb-10">
+          <div className="flex items-center gap-3 ml-auto">
             {session.data && (
-              <p>
-                Welcome, {uppercaseText(session?.data?.user?.user?.firstName)}
-              </p>
-            )}
-          </div>
+              <div className="flex flex-col">
+                <p className="text-sm capitalize">
+                  Welcome, {session?.data?.user?.user?.firstName}
+                </p>
+                <button onMouseEnter={() => setIsOpen((p) => !p)}>
+                  Account V
+                </button>
 
-          <button className="relative ml-auto" onClick={toggleDrawer}>
-            <IconComponent name="cart" className="p-2" />
-            {cartState?.length > 0 && (
-              <div className="absolute w-6 h-6 text-white bg-green-700 rounded-full -top-3 -right-3">
-                <p> {Number(cartState?.length)}</p>
+                {isOpen && <div className="border-2">Settings</div>}
               </div>
             )}
-          </button>
+
+            <button className="relative ml-auto" onClick={toggleDrawer}>
+              <IconComponent name="cart" className="p-2" />
+              {cartState?.length > 0 && (
+                <div className="absolute w-6 h-6 text-white bg-green-700 rounded-full -top-3 -right-3">
+                  <p> {Number(cartState?.length)}</p>
+                </div>
+              )}
+            </button>
+          </div>
         </nav>
       </header>
 
