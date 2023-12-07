@@ -11,6 +11,11 @@
   },
   "dependencies": {
     "@next/font": "14.0.2",
+    "@plunk/node": "^3.0.0",
+    "@react-email/button": "^0.0.13",
+    "@react-email/components": "^0.0.12",
+    "@react-email/html": "^0.0.7",
+    "@react-email/render": "^0.0.10",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.10",
     "@types/bcrypt": "^5.0.2",
@@ -35,6 +40,7 @@
     "react-dom": "18.2.0",
     "react-modern-drawer": "^1.2.2",
     "react-paystack": "^4.0.3",
+    "react-toastify": "^9.1.3",
     "typescript": "5.2.2",
     "zustand": "^4.4.6"
   },
