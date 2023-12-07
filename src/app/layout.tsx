@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import NextAuthSessionProvider from "./providers/session-provider";
 
@@ -16,6 +18,7 @@ export default async function RootLayout({
       <head />
 
       <body>
+        <ToastContainer />
         <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
       </body>
     </html>

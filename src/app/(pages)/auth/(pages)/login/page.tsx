@@ -70,7 +70,12 @@ const Login = () => {
           </span>
         </div>
 
-        <button type="submit">Login</button>
+        <button
+          className="py-2 px-10 border-2 rounded-lg max-w-[150px] mx-auto"
+          type="submit"
+        >
+          Login
+        </button>
       </form>
     </div>
   );

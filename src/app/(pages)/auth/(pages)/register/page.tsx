@@ -1,9 +1,17 @@
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-const Register = () => {
+const Register = async () => {
   const userTypes = ["admin", "user"];
   const handleSubmit = async (formData: FormData) => {
     "use server";
+
+    const session = await getServerSession();
+
+    //@ts-ignore
+    if (session?.user?.user?.email) {
+      redirect("/");
+    }
 
     const email = formData.get("email");
     const lastName = formData.get("lastName");
@@ -28,9 +36,9 @@ const Register = () => {
 
       const data = await response.json();
 
-      if (data?.message.includes("already")) {
-        console.log(data?.message);
-      }
+      // if (data?.message?.includes("already")) {
+      //   toast.warning(data?.message);
+      // }
 
       if (data?.user?.firstName.length > 0 && data?.user?.email.length > 0) {
         redirect("/auth/login");
@@ -41,7 +49,7 @@ const Register = () => {
     <div className="max-w-full md:max-w-[900px] mx-auto justify-center p-3 md:p-20">
       <form
         action={handleSubmit}
-        className="flex flex-col py-2 md:py-5 px-5 md:px-10 border gap-y-3"
+        className="flex flex-col px-5 py-2 border md:py-5 md:px-10 gap-y-3"
       >
         <h1 className="text-center">Register</h1>
         <input
@@ -74,7 +82,7 @@ const Register = () => {
           placeholder="Password"
         />
 
-        <div className="flex justify-between items-center gap-x-3">
+        <div className="flex items-center justify-between gap-x-3">
           {userTypes.map((type) => (
             <div key={type}>
               <label htmlFor="" className="mr-2">

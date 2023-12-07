@@ -12,11 +12,13 @@ import { useProductsStore } from "@/store/useProductsStore";
 import { CATEGORY } from "@/utils/data/category";
 import { renderUniqueArrayItems } from "@/utils/renderUniqueItems";
 import { SortOrder } from "mongoose";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 const SKIP = 8;
 export default function Home() {
   const router = useRouter();
+  const session = useSession();
   const { toggleDrawer, isOpen } = useToggle();
   const { incrementLoadMore, loadMoreLimit, loadMore } = useLoadMore(SKIP);
 
@@ -28,6 +30,17 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [sortDirection, setSortDirection] = useState<SortOrder>("asc");
   const [sortBy, setSortBy] = useState<"title" | "price">("title");
+
+  useEffect(() => {
+    if (
+      //@ts-ignore
+      session?.data?.user?.user?.email === undefined &&
+      session?.status === "unauthenticated"
+    ) {
+      router.push("/auth/login");
+    }
+    //@ts-ignore
+  }, [router, session?.data?.user?.user?.email, session.status]);
 
   const handleSortDirection = (e: ChangeEvent<HTMLSelectElement>) =>
     setSortDirection(e.target.value as SortOrder);
