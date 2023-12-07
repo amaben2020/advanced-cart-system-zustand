@@ -26,31 +26,35 @@ export const useCartStore = create(
       addToCart: (product: TProduct) => {
         set((state: any) => {
           const productInCart = state.cart.findIndex(
-            (elem: TProduct) => elem?._id === product._id,
+            (elem: TProduct) => elem?._id === product?._id,
           );
+
           product["quantity"] = 1;
-          if (
-            productInCart > -1 &&
-            state.cart.find((elem: TProduct) => elem?._id === product._id)
-          ) {
+          if (productInCart > -1) {
             const updatedCart = state.cart.map((elem: TProduct) => {
-              if (elem?._id === product._id) {
+              if (elem?._id === product?._id) {
                 return {
                   ...elem,
                   quantity: elem?.quantity + 1,
                 };
+              } else {
+                return elem;
               }
             });
+
             return {
               cart: updatedCart,
               totalAmount: state.totalAmount + 1,
-              totalPrice: state.totalPrice + product.price,
+              totalPrice: state.totalPrice + product?.price,
             };
           } else {
             return {
-              cart: [...state.cart, { ...product, quantity: product.quantity }],
+              cart: [
+                ...state.cart,
+                { ...product, quantity: product?.quantity },
+              ],
               totalAmount: state.totalAmount + 1,
-              totalPrice: state.totalPrice + product.price,
+              totalPrice: state.totalPrice + product?.price,
             };
           }
         });

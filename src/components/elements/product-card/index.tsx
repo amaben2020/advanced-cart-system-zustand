@@ -7,7 +7,7 @@ import Image from "next/image";
 const ProductCard = ({ product }: { product: TProduct }) => {
   const cart = useCartStore((state) => state);
 
-  const currentProductQty = cart.cart.find(
+  const currentProductQty = cart?.cart.find(
     (item) => item?._id === product?._id,
   )?.quantity;
 
