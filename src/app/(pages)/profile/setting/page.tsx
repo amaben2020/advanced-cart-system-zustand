@@ -1,6 +1,7 @@
 import authOptions from "@/app/lib/auth";
 import ProfileTemplate from "@/components/template/profile";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 const SettingPage = async () => {
   const {
@@ -8,8 +9,28 @@ const SettingPage = async () => {
     user: { user },
   } = await getServerSession(authOptions);
 
-  const handleEdit = (formData: FormData) => {
-    const email = formData.get("email");
+  const handleEdit = async (formData: FormData) => {
+    "use server";
+    const password = formData.get("password");
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
+
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_URL!}/api/update-profile?email=${user?.email}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          password,
+          firstName,
+          lastName,
+        }),
+      },
+    );
+    const info = await data.json();
+
+    if (info.user) {
+      redirect("/profile");
+    }
   };
 
   return (
@@ -17,31 +38,25 @@ const SettingPage = async () => {
       <ProfileTemplate profile={user}>
         <h1 className="pt-6">Edit Profile</h1>
 
-        <form action="" className="flex flex-col p-8">
-          <input
-            className="p-3 my-4 text-black border-2 rounded-md"
-            type="email"
-            name="email"
-            placeholder="Email"
-          />
+        <form action={handleEdit} className="flex flex-col p-8">
           <input
             className="p-3 my-4 text-black border-2 rounded-md"
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Update password"
           />
 
           <input
             className="p-3 my-4 text-black border-2 rounded-md"
             type="text"
             name="firstName"
-            placeholder="First name"
+            placeholder={user.firstName}
           />
           <input
             className="p-3 my-4 text-black border-2 rounded-md"
             type="text"
             name="lastName"
-            placeholder="Last name"
+            placeholder={user.lastName}
           />
 
           <button type="submit">Edit</button>

@@ -27,9 +27,10 @@ export const POST = async (req: NextRequest) => {
     const userInDb = await User.findOneAndUpdate(
       filter,
       {
-        firstName: request?.firstName ?? user?.firstName,
-        lastName: request?.lastName ?? user?.lastName,
-        password: hash ?? user.password,
+        firstName:
+          request?.firstName === "" ? user?.firstName : request?.firstName,
+        lastName: request?.lastName === "" ? user?.lastName : request?.lastName,
+        password: hash ?? user?.password,
       },
       {
         new: true,

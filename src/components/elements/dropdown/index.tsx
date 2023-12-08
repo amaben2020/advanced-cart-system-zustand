@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 const Dropdown = () => {
@@ -56,8 +57,8 @@ const Dropdown = () => {
           </svg>
           Profile
         </Link>
-        <Link
-          href="#logoutaction"
+        <button
+          onClick={() => signOut()}
           className="flex items-center my-4 text-red-500 gap-x-2"
         >
           <svg
@@ -75,7 +76,7 @@ const Dropdown = () => {
             />
           </svg>
           Logout
-        </Link>
+        </button>
       </ul>
     </div>
   );
