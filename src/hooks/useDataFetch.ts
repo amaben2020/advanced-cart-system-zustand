@@ -6,6 +6,8 @@ type TState = {
   isLoading: boolean;
   error: string;
 };
+
+// path is any url after the endpoint
 const useDataFetch = (path: string) => {
   enum DataFetchActions {
     LOADING = "LOADING",
