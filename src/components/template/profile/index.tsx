@@ -1,7 +1,6 @@
 "use client";
 
 import { generateAvatar } from "@/utils/generateAvatar";
-import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -38,10 +37,7 @@ const ProfileTemplate = () => {
               background: bg,
               color: textColor,
             }}
-            className={clsx(
-              text.length > 0 && `bg-[${bg}] text-[${text}]`,
-              "absolute flex items-center justify-center w-20 h-20 transform -translate-x-1/2 border rounded-full -bottom-10 left-1/2",
-            )}
+            className="absolute flex items-center justify-center w-20 h-20 transform -translate-x-1/2 border rounded-full -bottom-10 left-1/2"
           >
             <p className="justify-center inline-block my-auto text-xl font-bold text-center align-middle">
               {text}
