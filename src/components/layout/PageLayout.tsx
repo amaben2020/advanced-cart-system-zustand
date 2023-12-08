@@ -3,6 +3,7 @@ import useHydrate from "@/hooks/useHydrate";
 import { TState, useCartStore } from "@/store/useCartStore";
 import { useSession } from "next-auth/react";
 import { ReactNode, useState } from "react";
+import Dropdown from "../elements/dropdown";
 import IconComponent from "../elements/icon";
 
 const PageLayout = ({
@@ -31,9 +32,8 @@ const PageLayout = ({
                 <p className="text-sm capitalize">
                   Welcome, {session?.data?.user?.user?.firstName}
                 </p>
-                <button onMouseEnter={() => setIsOpen((p) => !p)}>
-                  Account V
-                </button>
+
+                <Dropdown />
 
                 {isOpen && <div className="border-2">Settings</div>}
               </div>
