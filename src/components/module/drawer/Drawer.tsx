@@ -19,6 +19,8 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
     (state: TStore) => state,
   );
 
+  const hasCartItems = cartState?.cart?.length;
+
   const [qty, setQty] = useState<number>(0);
 
   const isTablet = useMatchMedia(900);
@@ -59,14 +61,14 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
         </button>
 
         <div className="p-3">
-          {cartState?.cart?.length > 0 ? (
+          {hasCartItems > 0 ? (
             cartState?.cart?.map((cartItem: TProduct) => {
               return (
                 <div
                   key={cartItem?._id}
-                  className="flex justify-between items-center gap-6 py-4 my-3 border"
+                  className="flex items-center justify-between gap-6 py-4 my-3 border"
                 >
-                  <div className="flex items-center gap-x-10 p-2">
+                  <div className="flex items-center p-2 gap-x-10">
                     <Image
                       src={
                         Array.isArray(cartItem?.images)
@@ -88,7 +90,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-x-10 p-2">
+                  <div className="flex items-center p-2 gap-x-10">
                     <div>
                       <h4 className="mb-3 text-center">
                         {" "}
@@ -99,7 +101,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
                         onChange={(e) => {
                           setQty(Number(e.target.value));
                         }}
-                        className="mr-3 border-2 rounded-lg p-3"
+                        className="p-3 mr-3 border-2 rounded-lg"
                       >
                         {[1, 2, 3, 4, 5].map((elem) => (
                           <option value={elem} key={elem}>
@@ -144,11 +146,17 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
               );
             })
           ) : (
-            <p>You have {cartState?.cart?.length} cart items</p>
+            <p>You have {hasCartItems} cart items</p>
           )}
 
           <p className="my-4">Grand Total : ₦ {Number(sumGrandTotal)} </p>
-          {PayNow}
+          {hasCartItems > 0 && { PayNow }}
+
+          {hasCartItems ? null : (
+            <h3 className="text-center">
+              You have not added any items to cart
+            </h3>
+          )}
         </div>
       </div>
     </Drawer>

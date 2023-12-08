@@ -50,12 +50,14 @@ const SettingPage = async () => {
             className="p-3 my-4 text-black border-2 rounded-md"
             type="text"
             name="firstName"
+            pattern="[A-Za-z0-9]+"
             placeholder={user.firstName}
           />
           <input
             className="p-3 my-4 text-black border-2 rounded-md"
             type="text"
             name="lastName"
+            pattern="[A-Za-z0-9]+"
             placeholder={user.lastName}
           />
 
