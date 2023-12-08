@@ -46,7 +46,7 @@ const Register = async () => {
     }
   };
   return (
-    <div className="max-w-full md:max-w-[900px] mx-auto justify-center p-3 md:p-20">
+    <div className="container">
       <form
         action={handleSubmit}
         className="flex flex-col px-5 py-2 border md:py-5 md:px-10 gap-y-3"

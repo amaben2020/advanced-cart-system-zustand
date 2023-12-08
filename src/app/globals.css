@@ -16,6 +16,12 @@
   }
 }
 
+@layer utilities {
+  .container {
+    @apply max-w-full md:max-w-[900px] mx-auto justify-center p-5 md:p-20;
+  }
+}
+
 @layer components {
   .card {
     @apply border-2 p-4 rounded-lg text-blue-dark hover:border-green-500 hover:shadow-sm cursor-pointer;

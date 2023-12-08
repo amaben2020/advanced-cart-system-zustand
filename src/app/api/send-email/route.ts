@@ -1,7 +1,7 @@
 import Plunk from "@plunk/node";
 import { render } from "@react-email/render";
 import { NextRequest, NextResponse } from "next/server";
-import Email from "../../../components/email/index";
+import Email from "../../../components/module/email/index";
 
 export const POST = async (req: NextRequest, _: NextResponse) => {
   try {
