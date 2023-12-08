@@ -1,6 +1,7 @@
 "use client";
 import EyeClosed from "@/assets/svgs/EyeClosed";
 import EyeOpen from "@/assets/svgs/EyeOpen";
+import { usePlunk } from "@/hooks/usePlunk";
 import useTogglePasswordVisibility from "@/hooks/useTogglePasswordVisibility";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, useState } from "react";
@@ -12,6 +13,8 @@ const Login = () => {
   });
 
   const { handleToggle, showPassword, icon } = useTogglePasswordVisibility();
+
+  const { triggerPlunkEvt } = usePlunk({ email: userInfo.email });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -25,6 +28,7 @@ const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      await triggerPlunkEvt();
       if (!userInfo.email || userInfo.email.length === 0) {
         alert("You must insert email");
         return;

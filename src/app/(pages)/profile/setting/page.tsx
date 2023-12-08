@@ -61,7 +61,12 @@ const SettingPage = async () => {
             placeholder={user.lastName}
           />
 
-          <button type="submit">Edit</button>
+          <button
+            className="py-2 px-10 border-2 rounded-lg max-w-[150px] mx-auto"
+            type="submit"
+          >
+            Edit
+          </button>
         </form>
       </ProfileTemplate>
     </div>
