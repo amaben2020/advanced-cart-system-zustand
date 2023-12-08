@@ -44,6 +44,7 @@ const Login = () => {
     <div className="max-w-full md:max-w-[900px] mx-auto justify-center p-3 md:p-20">
       <form onSubmit={handleSubmit} className="flex flex-col p-20 border">
         <h3 className="mb-4"> Login </h3>
+        {/* TODO: refactor to reuse input component */}
         <input
           onChange={handleChange}
           className="p-3 my-4 text-black border-2 rounded-md"

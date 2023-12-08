@@ -1,17 +1,17 @@
-import authOptions from "@/app/lib/auth";
 import { generateAvatar } from "@/utils/generateAvatar";
-import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { ReactNode } from "react";
 
-const ProfileTemplate = async () => {
-  const {
-    //@ts-ignore
-    user: { user },
-  } = await getServerSession(authOptions);
-
+const ProfileTemplate = async ({
+  profile,
+  children,
+}: {
+  profile: any;
+  children: ReactNode;
+}) => {
   const { text, bg, textColor } = generateAvatar(
-    user?.firstName ?? "",
-    user?.lastName ?? "",
+    profile?.firstName ?? "",
+    profile?.lastName ?? "",
   );
 
   return (
@@ -49,27 +49,8 @@ const ProfileTemplate = async () => {
         </div>
       </div>
 
-      <div className="container pt-20 text-center border-2 rounded-lg shadow-lg lg:pt-10">
-        <h1 className="pt-5">Profile</h1>
-
-        <table className="w-full mt-6 table-auto">
-          <thead>
-            <tr>
-              <th>First name</th>
-              <th>Last name</th>
-              <th>Role</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{user?.firstName}</td>
-              <td>{user?.lastName}</td>
-              <td>{user?.role}</td>
-              <td>{user?.email}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="container pt-20 text-center border-2 shadow-lg rounded-b-md lg:pt-10">
+        {children}
       </div>
     </section>
   );
