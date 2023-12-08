@@ -1,5 +1,6 @@
 "use client";
 
+import useDataFetch from "@/hooks/useDataFetch";
 import { generateAvatar } from "@/utils/generateAvatar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ import { useEffect } from "react";
 const ProfileTemplate = () => {
   const session = useSession();
   const router = useRouter();
-  // extract this redirect logic to a hook or something
+  // TODO: extract this redirect logic to a hook or something
   useEffect(() => {
     if (
       //@ts-ignore
@@ -19,6 +20,12 @@ const ProfileTemplate = () => {
     }
     //@ts-ignore
   }, [router, session?.data?.user?.user?.email, session.status]);
+  const { state } = useDataFetch<{
+    user: Record<string, string>;
+    //@ts-ignore
+  }>(`/user/get-user?email=${session.data?.user?.user.email}`);
+
+  console.log(state);
 
   if (session.status === "authenticated") {
     const { text, bg, textColor } = generateAvatar(
@@ -45,8 +52,27 @@ const ProfileTemplate = () => {
           </div>
         </div>
 
-        <div className="container pt-20 text-center border-2 rounded-lg lg:pt-10">
+        <div className="container pt-20 text-center border-2 rounded-lg shadow-lg lg:pt-10">
           <h1 className="pt-5">Profile</h1>
+
+          <table className="w-full mt-6 table-auto">
+            <thead>
+              <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Role</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{state.data.user.firstName}</td>
+                <td>{state.data.user.lastName}</td>
+                <td>{state.data.user.role}</td>
+                <td>{state.data.user.email}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
     );

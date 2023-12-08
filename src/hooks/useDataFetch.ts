@@ -1,14 +1,14 @@
 // without react query, using only fetch and useReducer
 import { TProduct } from "@/store/useProductsStore";
 import { Reducer, useCallback, useEffect, useReducer } from "react";
-type TState = {
-  data: { products: TProduct[] };
+type TState<T> = {
+  data: T;
   isLoading: boolean;
   error: string;
 };
 
 // path is any url after the endpoint
-const useDataFetch = (path: string) => {
+const useDataFetch = <T>(path: string) => {
   enum DataFetchActions {
     LOADING = "LOADING",
     ERROR = "ERROR",
@@ -16,7 +16,7 @@ const useDataFetch = (path: string) => {
   }
 
   const INITIAL_STATE = {
-    data: { products: [] },
+    data: [],
     isLoading: false,
     error: "",
   };
@@ -26,7 +26,7 @@ const useDataFetch = (path: string) => {
     | { type: "ERROR"; payload: string }
     | { type: "SUCCESS"; payload: TProduct[] };
 
-  const dataReducer = (state: TState, action: TAction) => {
+  const dataReducer = (state: TState<T>, action: TAction) => {
     switch (action.type) {
       case DataFetchActions.LOADING:
         return {
@@ -37,20 +37,20 @@ const useDataFetch = (path: string) => {
         return {
           error: action?.payload,
           isLoading: false,
-          data: { products: [] },
+          data: [],
         };
       case DataFetchActions.SUCCESS:
         return {
           isLoading: false,
           error: "",
-          data: { products: action.payload },
+          data: action.payload,
         };
 
       default:
         throw Error("Unknown action");
     }
   };
-  const [state, dispatch] = useReducer<Reducer<TState, TAction>>(
+  const [state, dispatch] = useReducer<Reducer<TState<any>, TAction>>(
     dataReducer,
     INITIAL_STATE,
   );
@@ -58,12 +58,9 @@ const useDataFetch = (path: string) => {
   const getData = useCallback(async () => {
     try {
       dispatch({ type: "LOADING" });
-      const data = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/get-products${path}`,
-        {
-          method: "GET",
-        },
-      );
+      const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api${path}`, {
+        method: "GET",
+      });
 
       const response = await data.json();
 

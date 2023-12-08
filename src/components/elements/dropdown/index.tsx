@@ -13,7 +13,7 @@ const Dropdown = () => {
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
       </button>
-      <ul className="absolute z-40 hidden w-full p-3 text-gray-700 bg-white rounded-lg shadow-lg group-hover:block">
+      <ul className="absolute z-40 hidden w-full p-3 text-gray-700 bg-white border-2 rounded-lg shadow-lg group-hover:block">
         <Link
           href="/profile/setting"
           className="flex items-center my-4 gap-x-2"

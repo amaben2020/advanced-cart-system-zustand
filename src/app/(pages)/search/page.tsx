@@ -14,12 +14,21 @@ const SearchResults = () => {
 
   const searchedItem = location?.get(SEARCH_QUERY)?.split(" ").join("+");
 
-  const { state } = useDataFetch(`?product=${searchedItem}`);
+  const { state } = useDataFetch<TProduct[]>(
+    `/get-products?product=${searchedItem}`,
+  );
 
   return (
     <PageLayout>
       <div className="flex justify-between gap-x-6">
-        <h1 className="mb-10"> Search Results</h1>
+        <h1 className="mb-10">
+          {" "}
+          Search Results for{" "}
+          <span className="italic capitalize">
+            {" "}
+            {location?.get(SEARCH_QUERY)}
+          </span>
+        </h1>
 
         <Link href="/">
           <svg
@@ -46,8 +55,8 @@ const SearchResults = () => {
               ? Array.from([1, 2, 3, 4, 5, 6, 7, 8], (_, i) => (
                   <LoadingCard key={i} />
                 ))
-              : state.data.products?.products?.length > 0 &&
-                state.data?.products?.products?.map((product: TProduct) => (
+              : state.data?.products?.length > 0 &&
+                state.data?.products?.map((product: TProduct) => (
                   <ProductCard key={product._id} product={product} />
                 ))}
           </div>
