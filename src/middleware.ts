@@ -29,10 +29,6 @@ export const middleware = async (req: NextRequest) => {
       }
     };
 
-    // if (correctedRoutes.includes("/register")) {
-    //   return NextResponse.redirect(new URL("/auth/register", req.url));
-    // }
-
     // if no token, always redirect users to login
     if (userRole === undefined) {
       return NextResponse.redirect(new URL("/auth/login", req.url));

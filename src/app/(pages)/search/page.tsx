@@ -14,6 +14,7 @@ const SearchResults = () => {
 
   const searchedItem = location?.get(SEARCH_QUERY)?.split(" ").join("+");
 
+  //TODO: this component would be faster as a server component
   const { state } = useDataFetch<TProduct[]>(
     `/get-products?product=${searchedItem}`,
   );

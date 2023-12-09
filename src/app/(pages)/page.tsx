@@ -12,13 +12,12 @@ import { useProductsStore } from "@/store/useProductsStore";
 import { CATEGORY } from "@/utils/data/category";
 import { renderUniqueArrayItems } from "@/utils/renderUniqueItems";
 import { SortOrder } from "mongoose";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 const SKIP = 8;
 export default function Home() {
   const router = useRouter();
-  const session = useSession();
+
   const { toggleDrawer, isOpen } = useToggle();
   const { incrementLoadMore, loadMoreLimit, loadMore } = useLoadMore(SKIP);
 
