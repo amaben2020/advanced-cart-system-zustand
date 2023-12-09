@@ -43,6 +43,7 @@ const Register = async () => {
       if (data?.user?.firstName.length > 0 && data?.user?.email.length > 0) {
         redirect("/auth/login");
       }
+      console.log(data?.message);
     }
   };
   return (

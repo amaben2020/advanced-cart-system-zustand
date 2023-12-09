@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const middleware = async (req: NextRequest) => {
   try {
     const token: any = await getToken({ req });
+    console.log(token);
 
     const pathname = req.nextUrl.pathname;
 
@@ -17,6 +18,7 @@ export const middleware = async (req: NextRequest) => {
     ];
 
     const redirectBasedOnRole = (role: "user" | "admin") => {
+      console.log("ROLE", role);
       switch (role) {
         case "user":
           return NextResponse.redirect(new URL("/", req.url));
@@ -28,11 +30,6 @@ export const middleware = async (req: NextRequest) => {
           return NextResponse.redirect(new URL("/auth/login", req.url));
       }
     };
-
-    // if no token, always redirect users to login
-    if (userRole === undefined) {
-      return NextResponse.redirect(new URL("/auth/login", req.url));
-    }
 
     // authenticated users should never view this route regardless of role
     if (!!token && authenticatedRoutes.includes(pathname) && userRole) {
@@ -64,7 +61,8 @@ export const config = {
   matcher: [
     "/",
     "/admin/:path*",
-    "/api/admin/:function*",
+    "/admin/dashboard",
+    // "/api/admin/:function*",
     "/auth/login",
     "/auth/register",
   ],
