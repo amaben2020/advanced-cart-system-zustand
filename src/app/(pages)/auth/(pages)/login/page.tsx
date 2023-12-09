@@ -5,6 +5,7 @@ import { usePlunk } from "@/hooks/usePlunk";
 import useTogglePasswordVisibility from "@/hooks/useTogglePasswordVisibility";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
@@ -33,7 +34,7 @@ const Login = () => {
         alert("You must insert email");
         return;
       }
-
+      toast.success(`${userInfo.email} logged in successfully`, {});
       await signIn("credentials", {
         email: userInfo.email,
         password: userInfo.password,
@@ -48,6 +49,7 @@ const Login = () => {
     <div className="max-w-full md:max-w-[900px] mx-auto justify-center p-3 md:p-20">
       <form onSubmit={handleSubmit} className="flex flex-col p-20 border">
         <h3 className="mb-4"> Login </h3>
+
         {/* TODO: refactor to reuse input component */}
         <input
           onChange={handleChange}

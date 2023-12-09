@@ -10,7 +10,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <title> Product App </title>
+      <title> Cartstand Ecommerce App </title>
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
@@ -18,8 +18,11 @@ export default async function RootLayout({
       <head />
 
       <body>
-        <ToastContainer />
-        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+        <NextAuthSessionProvider>
+          {" "}
+          <ToastContainer position="top-center" />
+          {children}
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

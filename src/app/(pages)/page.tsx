@@ -31,17 +31,6 @@ export default function Home() {
   const [sortDirection, setSortDirection] = useState<SortOrder>("asc");
   const [sortBy, setSortBy] = useState<"title" | "price">("title");
 
-  useEffect(() => {
-    if (
-      //@ts-ignore
-      session?.data?.user?.user?.email === undefined &&
-      session?.status === "unauthenticated"
-    ) {
-      router.push("/auth/login");
-    }
-    //@ts-ignore
-  }, [router, session?.data?.user?.user?.email, session.status]);
-
   const handleSortDirection = (e: ChangeEvent<HTMLSelectElement>) =>
     setSortDirection(e.target.value as SortOrder);
   const handleSortBy = (e: ChangeEvent<HTMLSelectElement>) =>
