@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export const middleware = async (req: NextRequest) => {
   try {
     const token: any = await getToken({ req });
-    console.log(token);
 
     const pathname = req.nextUrl.pathname;
 

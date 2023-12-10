@@ -150,7 +150,7 @@ const DrawerComponent = ({ toggleDrawer, isOpen }: TToggle) => {
           )}
 
           <p className="my-4">Grand Total : ₦ {Number(sumGrandTotal)} </p>
-          {hasCartItems > 0 && { PayNow }}
+          {hasCartItems > 0 && PayNow}
 
           {hasCartItems ? null : (
             <h3 className="text-center">

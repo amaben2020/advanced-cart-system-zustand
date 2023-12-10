@@ -15,6 +15,9 @@ import { SortOrder } from "mongoose";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 const SKIP = 8;
+
+// TODO: fonts to use Heading: Benne,  Paragraph: Montserrat
+
 export default function Home() {
   const router = useRouter();
 
