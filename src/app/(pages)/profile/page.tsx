@@ -1,4 +1,5 @@
 import authOptions from "@/app/lib/auth";
+import Table from "@/components/elements/table";
 import ProfileTemplate from "@/components/template/profile";
 import { getServerSession } from "next-auth";
 
@@ -11,24 +12,12 @@ const ProfilePage = async () => {
     <div>
       <ProfileTemplate profile={user}>
         <h1 className="pt-5">Profile</h1>
-        <table className="w-full mt-6 table-auto">
-          <thead>
-            <tr>
-              <th>First name</th>
-              <th>Last name</th>
-              <th>Role</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{user?.firstName}</td>
-              <td>{user?.lastName}</td>
-              <td>{user?.role}</td>
-              <td>{user?.email}</td>
-            </tr>
-          </tbody>
-        </table>
+
+        <Table
+          heading={["First name", "Last name", "Role", "Email"]}
+          type="profile"
+          body={user}
+        />
       </ProfileTemplate>
     </div>
   );
