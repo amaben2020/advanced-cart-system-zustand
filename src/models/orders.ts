@@ -1,47 +1,19 @@
 import mongoose, { Schema, model } from "mongoose";
 
-export type MongooseSchemaKeys = "title" | "price";
-
 const orderSchema = new Schema({
-  brand: {
-    required: true,
-    type: String,
-  },
-  category: {
-    required: true,
-    type: String,
-  },
-  description: {
-    required: true,
-    type: String,
-  },
-  thumbnail: {
-    required: true,
-    type: String,
-  },
-  title: {
-    required: true,
-    type: String,
-  },
-  discountPercentage: {
-    required: true,
+  total: {
     type: Number,
   },
-  price: {
-    required: true,
-    type: Number,
+  reference: {
+    type: String,
   },
-  rating: {
-    required: true,
-    type: Number,
+  email: {
+    type: String,
   },
-  stock: {
-    required: true,
-    type: Number,
-  },
-  images: {
-    required: true,
-    type: [String],
+  payment_status: {
+    type: String,
+    enum: ["pending", "success"],
+    default: "pending",
   },
 });
 

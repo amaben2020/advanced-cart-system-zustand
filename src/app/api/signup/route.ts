@@ -36,7 +36,6 @@ export const POST = async (req: NextRequest) => {
       email: request.email,
       role: request.role,
     });
-    console.log(userInfo);
 
     if (userInfo?._id) {
       return Response.json(

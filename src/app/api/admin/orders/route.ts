@@ -1,11 +1,17 @@
+import Order from "@/models/orders";
+import dbConnect from "@/services/mongod-db";
 import crypto from "crypto";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-// the secret must be same as the paystack sec key
+//Paystack webhook integration
+
+// the secret must be same as the Paystack sec key
+
 const secret = process.env.PAYSTACK_SECRET_KEY!;
 export const POST = async (req: NextRequest) => {
   try {
+    await dbConnect();
     const headersList = headers();
 
     const referer = headersList.get("x-paystack-signature");
@@ -20,10 +26,16 @@ export const POST = async (req: NextRequest) => {
       .digest("hex");
 
     if (hash == referer && cType === "application/json") {
-      // create the order model here POST and another to GET
+      const createdOrder = await Order.create({
+        total: body?.data?.fees,
+        reference: body?.data?.reference,
+        payment_status: body?.data?.status,
+        email: body?.data?.customer.email,
+      });
+
       return NextResponse.json({
         message: "success",
-        body,
+        data: createdOrder,
       });
     } else {
       return NextResponse.json({
@@ -31,7 +43,9 @@ export const POST = async (req: NextRequest) => {
       });
     }
   } catch (error) {
+    console.log(error);
     return NextResponse.json({
+      message: "Something went wrong",
       error,
     });
   }
