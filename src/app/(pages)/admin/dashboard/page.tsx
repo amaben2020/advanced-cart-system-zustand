@@ -1,5 +1,7 @@
 import Table from "@/components/elements/table";
 import { Orders } from "@/utils/api/services/orders";
+
+import Chart from "@/components/module/chart";
 import AdminDashboardLayout from "../layout";
 
 const AdminDashboard = async () => {
@@ -7,12 +9,18 @@ const AdminDashboard = async () => {
 
   const orders = new Orders();
   const allOrders = await orders.getAll();
+  const chartData = allOrders?.orders.map((order: any) => ({
+    email: order.email,
+    cost: order.total,
+  }));
+
   return (
     <AdminDashboardLayout>
       <div>Welcome Back, Admin</div>
       <div className="grid grid-cols-3 my-6 gap-x-10">
-        <div className="col-span-2 p-10 border rounded-md">
+        <div className="col-span-2 p-10 border rounded-md max-h-[600px]">
           Summary this would be a chart
+          <Chart data={chartData} />
         </div>
         <div className="col-span-1 p-10 border rounded-md">Recent Orders</div>
       </div>
