@@ -1,7 +1,7 @@
-import ProductModel, { MongooseSchemaKeys } from "@/models/product";
+import ProductModel from "@/models/product";
 import dbConnect from "@/services/mongod-db";
 import { TProduct } from "@/store/useProductsStore";
-import { SortOrder } from "mongoose";
+import { extractSearchParams } from "@/utils/api/extractSearchParams";
 import { NextRequest, NextResponse } from "next/server";
 import { ErrorHandler } from "../helpers/error-handler";
 
@@ -14,12 +14,15 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
   try {
     // filtration and search logic
-    const url = new URL(req.url);
-    const searchParams = new URLSearchParams(url.search);
-    const category = searchParams.get("category");
-    const product = searchParams.get("product");
-    const sortBy = searchParams.get("sortBy") as MongooseSchemaKeys;
-    const direction = searchParams.get("direction") as SortOrder | null | any;
+    const { category, product, sortBy, direction } = extractSearchParams(
+      req.url,
+      {
+        category: "category",
+        product: "product",
+        sortBy: "sortBy",
+        direction: "direction",
+      },
+    );
 
     const hasCategoryWithoutSort = Boolean(
       category?.length && !sortBy?.length && !direction?.length,
