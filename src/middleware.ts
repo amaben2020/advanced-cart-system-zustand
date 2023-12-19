@@ -17,7 +17,6 @@ export const middleware = async (req: NextRequest) => {
     ];
 
     const redirectBasedOnRole = (role: "user" | "admin") => {
-      console.log("ROLE", role);
       switch (role) {
         case "user":
           return NextResponse.redirect(new URL("/", req.url));
@@ -48,6 +47,10 @@ export const middleware = async (req: NextRequest) => {
           { success: false, message: "User not admin, authentication failed" },
           { status: 401 },
         );
+      }
+
+      if (pathname === "/") {
+        return NextResponse.redirect(new URL("/auth/login", req.url));
       }
     }
   } catch (error) {
