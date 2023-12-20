@@ -8,7 +8,6 @@ import { ErrorHandler } from "../helpers/error-handler";
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
   await dbConnect();
-  const REDIS_KEY = "cache";
   try {
     // filtration and search logic
     const { category, product, sortBy, direction } = extractSearchParams(
