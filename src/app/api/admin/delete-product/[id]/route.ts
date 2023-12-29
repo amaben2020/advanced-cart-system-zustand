@@ -1,6 +1,8 @@
+import ProductModel from "@/models/product";
+import dbConnect from "@/services/mongod-db";
 import { NextResponse } from "next/server";
 
-export const POST = (
+export const POST = async (
   request: Request,
   { params }: { params: { id: string } },
 ) => {
@@ -10,12 +12,18 @@ export const POST = (
 
   // return a success message
 
+  await dbConnect();
+
   try {
     const productId = params.id;
     console.log(productId);
 
+    await ProductModel.findByIdAndDelete({
+      _id: productId,
+    }).exec();
+
     return NextResponse.json({
-      message: productId,
+      message: `Product ${productId} deleted successfully`,
     });
   } catch (error) {
     console.log(error);

@@ -2,7 +2,9 @@
 import { useCartStore } from "@/store/useCartStore";
 import { TProduct } from "@/store/useProductsStore";
 import { truncate } from "@/utils/truncate";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
   const cart = useCartStore((state) => state);
@@ -11,8 +13,17 @@ const ProductCard = ({ product }: { product: TProduct }) => {
     (item) => item?._id === product?._id,
   )?.quantity;
 
+  const session = useSession();
+  //@ts-ignore
+  const user = session?.data?.user?.user;
+
+  const DynamicLink = user?.role === "admin" ? Link : "div";
+
   return (
-    <div className="relative flex flex-col gap-2 card">
+    <DynamicLink
+      href={`/admin/edit/${product?._id}`}
+      className="relative flex flex-col gap-2 card"
+    >
       <div className="absolute z-20 px-2 py-1 text-white bg-green-700 rounded-xl -left-1 -top-5">
         {product?.category}
       </div>
@@ -52,7 +63,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
       >
         Add to cart
       </button>
-    </div>
+    </DynamicLink>
   );
 };
 

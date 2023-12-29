@@ -159,7 +159,7 @@ const CreateProduct = () => {
 
               <Input
                 type="file"
-                onChange={(e) => setFile(e.target?.files[0])}
+                onChange={(e: any) => setFile(e.target?.files[0])}
                 label="Choose Image"
                 className="flex-1 cursor-pointer basis-20"
               />
