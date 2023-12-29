@@ -41,6 +41,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       },
     );
   } catch (error) {
+    console.log(error);
     return ErrorHandler("Something went wrong", 500);
   }
 };

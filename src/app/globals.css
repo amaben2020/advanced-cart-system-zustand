@@ -27,3 +27,7 @@
     @apply border-2 p-4 rounded-lg text-blue-dark hover:border-green-500 hover:shadow-sm cursor-pointer;
   }
 }
+
+input[type="file"] {
+  opacity: 0; /* make transparent */
+}

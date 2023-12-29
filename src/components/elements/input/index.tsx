@@ -2,6 +2,8 @@ import { HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 interface IInputProps extends HTMLAttributes<HTMLInputElement> {
   label: string;
+  type?: string;
+  name?: string;
   className?: string;
 }
 

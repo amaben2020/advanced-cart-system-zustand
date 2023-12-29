@@ -1,6 +1,7 @@
 import { uppercaseText } from "@/utils/uppercaseText";
+import clsx from "clsx";
 import { useState } from "react";
-
+import styles from "./styles.module.css";
 const FilterDropdown = ({
   items,
   title,
@@ -20,7 +21,9 @@ const FilterDropdown = ({
     <>
       <button
         onClick={() => setIsOpen((p) => !p)}
-        className="flex justify-between w-full p-4 my-3 transition border-2 rounded-lg"
+        className={clsx(
+          "flex justify-between w-full p-4 my-3 border-2 rounded-lg",
+        )}
       >
         {title}
 
@@ -58,7 +61,7 @@ const FilterDropdown = ({
       </button>
 
       {isOpen && (
-        <div className="p-2">
+        <div className={clsx(styles.wrapper, "p-2")}>
           <div className="flex flex-col gap-3 mb-4">
             <div className="flex flex-col gap-3">
               {items.map((category: string) => (

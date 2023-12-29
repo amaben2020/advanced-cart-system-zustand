@@ -64,6 +64,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
     const products: Awaited<TProduct[]> = await query.exec();
 
+    console.log(products);
+
     return NextResponse.json(
       {
         products,
