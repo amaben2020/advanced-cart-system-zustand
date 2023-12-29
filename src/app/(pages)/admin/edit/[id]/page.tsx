@@ -15,7 +15,6 @@ const EditProduct = ({ params }: { params: { id: string } }) => {
 
       const message = await resposne.json();
 
-      console.log(message);
       toast(message.message);
 
       router.push("/");
