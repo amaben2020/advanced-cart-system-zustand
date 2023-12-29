@@ -9,7 +9,7 @@ const AdminDashboard = async () => {
 
   const orders = new Orders();
   const allOrders = await orders.getAll();
-  const chartData = allOrders?.orders.map((order: any) => ({
+  const chartData = allOrders?.orders?.map((order: any) => ({
     email: order.email,
     cost: order.total,
   }));
