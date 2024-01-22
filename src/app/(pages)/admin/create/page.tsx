@@ -3,7 +3,7 @@
 import Input from "@/components/elements/input";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import AdminDashboardLayout from "../layout";
+import AdminDashboardLayout from "../layouts";
 
 const CreateProduct = () => {
   const [file, setFile] = useState("");

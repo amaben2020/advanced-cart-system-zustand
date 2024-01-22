@@ -3,7 +3,6 @@ import Table from "@/components/elements/table";
 import { Orders } from "@/utils/api/services/orders";
 
 import Chart from "@/components/module/chart";
-import AdminDashboardLayout from "../layout";
 
 const AdminDashboard = async () => {
   // TODO: create order Schema, create an endpoint that gets updated via webhook the orderSchema in mongodb or create in Airtable
@@ -16,7 +15,7 @@ const AdminDashboard = async () => {
   }));
 
   return (
-    <AdminDashboardLayout>
+    <section>
       <div>Welcome Back, Admin</div>
       <div className="grid grid-cols-3 my-6 gap-x-10">
         <div className="col-span-2 p-10 border rounded-md max-h-[600px]">
@@ -44,7 +43,7 @@ const AdminDashboard = async () => {
         </div>
         <div className="col-span-1 p-10 border rounded-md">Recent Orders</div>
       </div>
-    </AdminDashboardLayout>
+    </section>
   );
 };
 
