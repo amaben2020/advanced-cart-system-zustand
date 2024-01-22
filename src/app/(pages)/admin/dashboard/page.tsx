@@ -8,7 +8,7 @@ const AdminDashboard = async () => {
   // TODO: create order Schema, create an endpoint that gets updated via webhook the orderSchema in mongodb or create in Airtable
 
   const orders = new Orders();
-  const allOrders = await orders.getAll();
+  const allOrders = await orders?.getAll();
   const chartData = allOrders?.orders?.map((order: any) => ({
     email: order.email,
     cost: order.total,

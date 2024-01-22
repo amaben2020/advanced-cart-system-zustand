@@ -84,7 +84,7 @@ const Register = async () => {
         />
 
         <div className="flex items-center justify-between gap-x-3">
-          {userTypes.map((type) => (
+          {userTypes?.map((type) => (
             <div key={type}>
               <label htmlFor="" className="mr-2">
                 {type}
