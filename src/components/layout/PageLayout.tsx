@@ -20,6 +20,8 @@ const PageLayout = ({
 
   const session = useSession();
 
+  const userRole = session.data?.user?.user?.role;
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -29,8 +31,9 @@ const PageLayout = ({
           <div className="flex items-center gap-3 ml-auto">
             {session.data && (
               <div className="flex flex-col">
-                <p className="text-sm capitalize">
-                  Welcome, {session?.data?.user?.user?.firstName}
+                <p className="text-sm capitalize flex gap-1">
+                  Welcome, {userRole === "admin" && <h2>Admin</h2>}{" "}
+                  {session?.data?.user?.user?.firstName}
                 </p>
 
                 <Dropdown />
@@ -39,14 +42,16 @@ const PageLayout = ({
               </div>
             )}
 
-            <button className="relative ml-auto" onClick={toggleDrawer}>
-              <IconComponent name="cart" className="p-2" />
-              {cartState?.length > 0 && (
-                <div className="absolute w-6 h-6 text-white bg-green-700 rounded-full -top-3 -right-3">
-                  <p> {Number(cartState?.length)}</p>
-                </div>
-              )}
-            </button>
+            {userRole !== "admin" && (
+              <button className="relative ml-auto" onClick={toggleDrawer}>
+                <IconComponent name="cart" className="p-2" />
+                {cartState?.length > 0 && (
+                  <div className="absolute w-6 h-6 text-white bg-green-700 rounded-full -top-3 -right-3">
+                    <p> {Number(cartState?.length)}</p>
+                  </div>
+                )}
+              </button>
+            )}
           </div>
         </nav>
       </header>
