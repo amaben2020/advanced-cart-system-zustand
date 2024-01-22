@@ -3,7 +3,6 @@
 import Input from "@/components/elements/input";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import AdminDashboardLayout from "../layouts";
 
 const CreateProduct = () => {
   const [file, setFile] = useState("");
@@ -61,7 +60,7 @@ const CreateProduct = () => {
     }
   };
   return (
-    <AdminDashboardLayout>
+    <section>
       <section className="flex flex-col gap-5 p-10">
         <h1>Create Product</h1>
 
@@ -176,7 +175,7 @@ const CreateProduct = () => {
 
         <Image src={image} height={200} width={200} alt="" />
       </section>
-    </AdminDashboardLayout>
+    </section>
   );
 };
 
