@@ -48,7 +48,7 @@ const Terms = () => {
     }
   };
 
-  const handleSend = (data) => {
+  const handleSend = (data: any) => {
     console.log(data);
     const formData = new FormData();
 

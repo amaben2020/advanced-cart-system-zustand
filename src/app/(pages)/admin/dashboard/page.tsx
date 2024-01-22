@@ -1,4 +1,3 @@
-"use client";
 //@ts-nocheck
 import Table from "@/components/elements/table";
 import { Orders } from "@/utils/api/services/orders";
