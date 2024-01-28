@@ -5,7 +5,7 @@ const EditProduct = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const handleDelete = async () => {
     try {
-      confirm("Are you sure you want to delete this product?");
+      confirm("Are you sure you want to delete this product?.");
 
       const resposne = await fetch(`/api/admin/delete-product/${params.id}`, {
         method: "POST",
