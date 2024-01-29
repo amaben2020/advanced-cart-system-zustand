@@ -4,6 +4,7 @@ import EyeOpen from "@/assets/svgs/EyeOpen";
 import { usePlunk } from "@/hooks/usePlunk";
 import useTogglePasswordVisibility from "@/hooks/useTogglePasswordVisibility";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -83,6 +84,11 @@ const Login = () => {
         >
           Login
         </button>
+
+        <div className="flex justify-between">
+          <p>Do not have an account? </p>
+          <Link href="/auth/register">Register</Link>
+        </div>
       </form>
     </div>
   );
